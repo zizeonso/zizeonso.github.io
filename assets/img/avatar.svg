@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Zijin Su avatar">
+  <rect width="240" height="240" rx="120" fill="#eef3f1"/>
+  <circle cx="120" cy="120" r="88" fill="#1f766d"/>
+  <circle cx="120" cy="120" r="72" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.55"/>
+  <text x="120" y="134" text-anchor="middle" font-family="Arial, sans-serif" font-size="54" font-weight="700" fill="#ffffff">ZS</text>
+</svg>
