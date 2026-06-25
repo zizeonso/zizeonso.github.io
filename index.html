@@ -14,11 +14,9 @@
   <nav class="topbar" aria-label="Primary navigation">
     <a class="brand" href="#">Zijin Su</a>
     <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#research">Research</a>
+      <a href="research.html">Researches</a>
       <a href="#publications">Publications</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
+      <a href="assets/cv/CV_Zijin_Su_Msci_0615.pdf">CV</a>
       <a href="#contact">Contact</a>
       <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">
         <span aria-hidden="true">◐</span>
@@ -28,12 +26,10 @@
 
   <div class="page">
     <aside class="profile" aria-label="Profile">
-      <img class="avatar" src="assets/img/avatar.svg" alt="Zijin Su profile avatar">
+      <img class="avatar" src="assets/img/quange.png" alt="Zijin Su profile avatar">
       <h1>Zijin Su</h1>
       <p class="role">MSc Physics Student</p>
-      <p class="affiliation">University College London<br>London, UK</p>
-
-      <img class="institution-logo institution-logo-wide" src="assets/img/ucllogo.png" alt="University College London logo">
+      <p class="affiliation"><strong>University College London</strong><br>London, UK</p>
 
       <div class="profile-links" aria-label="Profile links">
         <a href="mailto:zcapsua@ucl.ac.uk">Email</a>
@@ -48,10 +44,12 @@
         <p class="eyebrow">Academic Homepage</p>
         <h2>About</h2>
         <p>
-          I am an MSc Physics student at University College London, working at
+          I am an MSci Physics student at University College London, working at
           the intersection of radar altimetry, sea-ice remote sensing, and deep
-          learning. My current research focuses on generating and classifying
-          radar altimetry echoes from satellite observations over Arctic sea ice.
+          learning. I work with Dr. Michel Tsamados at the Centre for Polar
+          Observation and Modelling (CPOM). My current research focuses on
+          generating and classifying radar altimetry echoes from satellite
+          observations over Arctic sea ice.
         </p>
         <p>
           My broader interests include physics-aware deep learning, satellite
@@ -61,35 +59,54 @@
       </section>
 
       <section id="news" class="section">
-        <h2>News</h2>
+        <h2>🎉 News</h2>
         <ul class="news-list">
-          <li><time datetime="2026-06">Jun 2026</time><span>Academic homepage launched with CV-aligned research and education profile.</span></li>
-          <li><time datetime="2026-06">Jun 2026</time><span>MSc thesis in progress: deep learning for radar altimetry echo classification and sea surface image recognition.</span></li>
+          <li><time datetime="2026-07">Jul 2026</time><span>Deep learning for sea-ice altimetry echo generation submitted to <em>IOP Machine Learning: Earth</em> and under review.</span></li>
+          <li><time datetime="2026-07">Jul 2026</time><span>MSc Physics graduation from University College London, expected First Class Honours.</span></li>
+          <li><time datetime="2026-06">Jun 2026</time><span>Deep learning for sea-ice altimetry echo generation paper preparing for submission.</span></li>
         </ul>
       </section>
 
       <section id="research" class="section">
-        <h2>Research Interests</h2>
+        <h2>🌏 Research Interests</h2>
         <div class="tag-list" aria-label="Research topics">
           <span>Radar Altimetry</span>
-          <span>Sea Ice</span>
           <span>SAR Remote Sensing</span>
           <span>Sentinel-3 OLCI/SRAL</span>
+          <span>InSAR</span>
+          <span>Sea Ice</span>
+          <span>Permafrost</span>
+          <span>Physics Process</span>
+          <span>Signal Synthetics</span>
+          <span>Image Processing</span>
           <span>Machine Learning</span>
+          <span>Deep Learning</span>
+          <span>NLP</span>
+          <span>Agentic Workflow</span>
           <span>Scientific Computing</span>
         </div>
-        <div class="research-grid">
-          <article>
-            <h3>Altimetry Echo Generation</h3>
-            <p>Building paired Sentinel-3 optical-altimetry datasets and physics-aware models for SAR waveform reconstruction.</p>
+      </section>
+
+      <section id="researches" class="section">
+        <h2>🔬 Researches</h2>
+        <div class="research-list">
+          <article class="research-teaser">
+            <div>
+              <h3>Deep Learning for Radar Altimetry Echo Generation in Sea Ice Surface Image Recognition</h3>
+              <p>
+                Generating physically consistent SAR altimetry waveforms from Sentinel-3 OLCI sea-ice surface imagery using deep generative models.
+              </p>
+              <a class="text-link" href="research.html">Read abstract</a>
+            </div>
+            <figure>
+              <a href="research.html">
+                <img src="assets/img/compare_4x6_web.png" alt="Comparison of sea-ice image patches and radar altimetry waveform generation models">
+              </a>
+            </figure>
           </article>
           <article>
-            <h3>Geophysical Consistency</h3>
-            <p>Evaluating waveform morphology, retracker-relevant physical descriptors, and downstream geophysical reliability.</p>
-          </article>
-          <article>
-            <h3>Scientific ML</h3>
-            <p>Applying CNNs, BiLSTMs, attention mechanisms, cGANs, and physics-aware learning to scientific datasets.</p>
+            <h3>JWST Data Analysis and Modelling</h3>
+            <p>Multi-band JWST target selection, image registration, noise reduction, photometric flux extraction, and SED fitting for physical modelling.</p>
           </article>
         </div>
       </section>
@@ -99,32 +116,16 @@
         <ol class="publications">
           <li>
             <p class="pub-title">Deep Learning for Radar Altimetry Echo Generation in Sea Ice Surface Image Recognition</p>
-            <p class="pub-meta"><strong>Zijin Su</strong>. Under review, <em>IOP: Machine Learning Earth</em>.</p>
-            <p class="pub-links">
-              <a href="assets/cv/CV_Zijin_Su_Msci_0615.pdf">CV</a>
-            </p>
+            <p class="pub-meta"><strong>Zijin Su</strong><sup>†</sup>, Michel Tsamados<sup>*</sup>, Weibin Chen, Ryan Nichol, Connor Nelson, Stefan Hendricks, and Jack C. Landy. Preparing for submission, 2026. <span class="pub-note"><sup>†</sup>First author; <sup>*</sup>corresponding author.</span></p>
           </li>
           <li>
             <p class="pub-title">Based on Data Balancing and Model Improvement for Multi-Label Sentiment Classification Performance Enhancement</p>
-            <p class="pub-meta"><strong>Zijin Su</strong>. Under review, <em>Journal of Information and Telecommunication</em>.</p>
+            <p class="pub-meta"><strong>Zijin Su</strong><sup>†</sup>, Huanzhu Lv<sup>†</sup>, Yuren Niu, and Yiming Liu. <em>arXiv</em>, 2026. <span class="pub-note"><sup>†</sup>Co-first authors.</span></p>
+            <p class="pub-links">
+              <a href="assets/publications/manuscript9.pdf">PDF</a>
+            </p>
           </li>
         </ol>
-      </section>
-
-      <section id="projects" class="section">
-        <h2>Projects</h2>
-        <div class="project-list">
-          <article>
-            <h3>Deep Learning for Altimetry Echo Generation</h3>
-            <p>Paired Sentinel-3 OLCI/SRAL dataset construction, waveform alignment, physical descriptor extraction, and cGAN-based SAR waveform reconstruction.</p>
-            <a href="assets/cv/CV_Zijin_Su_Msci_0615.pdf">CV details</a>
-          </article>
-          <article>
-            <h3>JWST Data Analysis and Modelling</h3>
-            <p>Multi-band JWST target selection, image registration, noise reduction, photometric flux extraction, and SED fitting for physical modelling.</p>
-            <a href="assets/cv/CV_Zijin_Su_Msci_0615.pdf">CV details</a>
-          </article>
-        </div>
       </section>
 
       <section id="experience" class="section">
@@ -134,7 +135,7 @@
             <img src="assets/img/ucllogo.png" alt="" aria-hidden="true">
             <div>
               <h3>University College London</h3>
-              <p>MSc Physics, First Class Honours expected</p>
+              <p>MSc Physics</p>
               <time>Expected July 2026</time>
             </div>
           </article>
@@ -142,7 +143,8 @@
             <img src="assets/img/ucllogo.png" alt="" aria-hidden="true">
             <div>
               <h3>Centre for Polar Observation and Modelling, UCL</h3>
-              <p>Research Assistant, deep learning for altimetry echo generation; supervisor: Dr. Michel Tsamados</p>
+              <p>Research Assistant, deep learning for altimetry echo generation</p>
+              <p>Supervisor: Dr. Michel Tsamados</p>
               <time>Aug 2025 - Jun 2026</time>
             </div>
           </article>
@@ -150,7 +152,8 @@
             <img src="assets/img/thu_logo.png" alt="" aria-hidden="true">
             <div>
               <h3>Department of Astronomy, Tsinghua University</h3>
-              <p>Research Assistant, JWST data analysis and modelling; supervisor: Prof. Zheng Cai</p>
+              <p>Research Assistant, JWST data analysis and modelling</p>
+              <p>Supervisor: Prof. Zheng Cai</p>
               <time>Jun 2025 - Dec 2025</time>
             </div>
           </article>
@@ -158,7 +161,7 @@
             <img src="assets/img/ucllogo.png" alt="" aria-hidden="true">
             <div>
               <h3>University College London</h3>
-              <p>BSc Physics, Second Class Honours, Upper Division</p>
+              <p>BSc Physics</p>
               <time>Graduated June 2025</time>
             </div>
           </article>

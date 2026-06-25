@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Researches | Zijin Su</title>
+  <meta name="description" content="Research abstract for deep learning based radar altimetry echo generation in sea ice surface image recognition.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="topbar" aria-label="Primary navigation">
+    <a class="brand" href="index.html">Zijin Su</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#publications">Publications</a>
+      <a href="assets/cv/CV_Zijin_Su_Msci_0615.pdf">CV</a>
+      <a href="index.html#contact">Contact</a>
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main" class="detail-page">
+    <header class="detail-header">
+      <p class="eyebrow">Researches</p>
+      <h1>Deep Learning for Radar Altimetry Echo Generation in Sea Ice Surface Image Recognition</h1>
+      <p class="detail-meta">Zijin Su<sup>†</sup>, Michel Tsamados<sup>*</sup>, Weibin Chen, Ryan Nichol, Connor Nelson, Stefan Hendricks, and Jack C. Landy. Preparing for submission, 2026. <span class="pub-note"><sup>†</sup>First author; <sup>*</sup>corresponding author.</span></p>
+    </header>
+
+    <article class="research-detail">
+      <figure>
+        <a href="assets/img/compare_4x6.png">
+          <img src="assets/img/compare_4x6_web.png" alt="Comparison of sea-ice image patches and radar altimetry waveform generation models">
+        </a>
+        <figcaption>Representative comparison of raw image patches, cropped patches, and generated SAR altimetry waveforms across cGAN, RWcGAN, CNN-regressor, and diffusion models.</figcaption>
+      </figure>
+
+      <section class="abstract-panel" aria-label="Research abstract">
+        <h2>Abstract</h2>
+        <p>
+          Sea-ice radar echoes are difficult to interpret because snow, roughness, open-water leads, and mixed surface types can all change the returned waveform within one satellite footprint. This project treats waveform formation as a cross-modal generation problem: from co-located Sentinel-3 OLCI optical image patches, a conditional generative model learns to produce the corresponding SRAL radar-altimetry waveforms. I evaluate the generated echoes by waveform accuracy, morphological descriptors, and retracking-based physical consistency, showing how multimodal deep learning can link visible sea-ice structure with radar-altimetry response for waveform interpretation and sea-ice retrieval. A key design is to encode the waveform in physically meaningful segments rather than as a single undifferentiated curve. This helps the model focus on the leading edge, trailing edge, peak structure, and retracker-relevant regions that carry most of the geophysical information.
+        </p>
+        <div class="detail-tags" aria-label="Research keywords">
+          <span>Sea Ice</span>
+          <span>SAR Altimetry</span>
+          <span>Sentinel-3 OLCI/SRAL</span>
+          <span>Waveform Generation</span>
+          <span>cGAN</span>
+          <span>Diffusion</span>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
