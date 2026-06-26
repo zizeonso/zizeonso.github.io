@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
-<body>
+<body class="research-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <nav class="topbar" aria-label="Primary navigation">
@@ -19,7 +19,7 @@
       <a href="assets/cv/CV_Zijin_Su_Msci_0615.pdf">CV</a>
       <a href="index.html#contact">Contact</a>
       <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">
-        <span aria-hidden="true">◐</span>
+        <span aria-hidden="true">☀️</span>
       </button>
     </div>
   </nav>
@@ -31,29 +31,84 @@
       <p class="detail-meta">Zijin Su<sup>†</sup>, Michel Tsamados<sup>*</sup>, Weibin Chen, Ryan Nichol, Connor Nelson, Stefan Hendricks, and Jack C. Landy. Preparing for submission, 2026. <span class="pub-note"><sup>†</sup>First author; <sup>*</sup>corresponding author.</span></p>
     </header>
 
-    <article class="research-detail">
-      <figure>
-        <a href="assets/img/compare_4x6.png">
-          <img src="assets/img/compare_4x6_web.png" alt="Comparison of sea-ice image patches and radar altimetry waveform generation models">
-        </a>
-        <figcaption>Representative comparison of raw image patches, cropped patches, and generated SAR altimetry waveforms across cGAN, RWcGAN, CNN-regressor, and diffusion models.</figcaption>
-      </figure>
+    <section class="abstract-panel abstract-wide" aria-label="Research abstract">
+      <h2>Abstract</h2>
+      <p>
+        Sea-ice radar echoes are difficult to interpret because snow, roughness, open-water leads, and mixed surface types can all change the returned waveform within one satellite footprint. This project treats waveform formation as a cross-modal generation problem: from co-located Sentinel-3 OLCI optical image patches, a conditional generative model learns to produce the corresponding SRAL radar-altimetry waveforms. I evaluate the generated echoes by waveform accuracy, morphological descriptors, and retracking-based physical consistency, showing how multimodal deep learning can link visible sea-ice structure with radar-altimetry response for waveform interpretation and sea-ice retrieval. A key design is to encode the waveform in physically meaningful segments rather than as a single undifferentiated curve. This helps the model focus on the leading edge, trailing edge, peak structure, and retracker-relevant regions that carry most of the geophysical information.
+      </p>
+      <div class="detail-tags" aria-label="Research keywords">
+        <span>Sea Ice</span>
+        <span>SAR Altimetry</span>
+        <span>Sentinel-3 OLCI/SRAL</span>
+        <span>Waveform Generation</span>
+        <span>cGAN</span>
+        <span>Diffusion</span>
+      </div>
+    </section>
 
-      <section class="abstract-panel" aria-label="Research abstract">
-        <h2>Abstract</h2>
-        <p>
-          Sea-ice radar echoes are difficult to interpret because snow, roughness, open-water leads, and mixed surface types can all change the returned waveform within one satellite footprint. This project treats waveform formation as a cross-modal generation problem: from co-located Sentinel-3 OLCI optical image patches, a conditional generative model learns to produce the corresponding SRAL radar-altimetry waveforms. I evaluate the generated echoes by waveform accuracy, morphological descriptors, and retracking-based physical consistency, showing how multimodal deep learning can link visible sea-ice structure with radar-altimetry response for waveform interpretation and sea-ice retrieval. A key design is to encode the waveform in physically meaningful segments rather than as a single undifferentiated curve. This helps the model focus on the leading edge, trailing edge, peak structure, and retracker-relevant regions that carry most of the geophysical information.
-        </p>
-        <div class="detail-tags" aria-label="Research keywords">
-          <span>Sea Ice</span>
-          <span>SAR Altimetry</span>
-          <span>Sentinel-3 OLCI/SRAL</span>
-          <span>Waveform Generation</span>
-          <span>cGAN</span>
-          <span>Diffusion</span>
+    <section class="research-showcase" aria-label="Research visual summary">
+      <article class="showcase-card compact-figure">
+        <div class="showcase-copy">
+          <p class="eyebrow">Representative Results</p>
+          <h2>Image-to-waveform generation</h2>
+          <p>Representative comparison of sea-ice image patches and generated SAR altimetry waveforms across baseline and proposed models.</p>
         </div>
-      </section>
-    </article>
+        <figure>
+          <a href="assets/img/compare_4x6.png">
+            <img src="assets/img/compare_4x6_web.png" alt="Comparison of sea-ice image patches and radar altimetry waveform generation models">
+          </a>
+        </figure>
+      </article>
+
+      <article class="showcase-card showcase-wide">
+        <div class="showcase-copy">
+          <p class="eyebrow">Model Architecture</p>
+          <h2>Region-aware waveform generation</h2>
+          <p>A conditional generator maps co-located optical image patches into SAR altimetry waveforms, while region-aware discriminators provide targeted supervision over the physically informative echo segments.</p>
+        </div>
+        <figure>
+          <img src="assets/img/rwcgan.png" alt="RWcGAN model architecture for radar altimetry waveform generation">
+        </figure>
+      </article>
+
+      <article class="showcase-card">
+        <div class="showcase-copy">
+          <p class="eyebrow">Surface Properties</p>
+          <h2>Retracked geophysical consistency</h2>
+          <p>Generated waveforms are evaluated through downstream retracking, linking waveform shape to along-track physical variables.</p>
+        </div>
+        <div class="paired-figures result-pair">
+          <figure>
+            <img src="assets/img/ssh6.png" alt="Along-track sea surface height comparison from retracked waveform products">
+            <figcaption>Sea surface height</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/macroto6.png" alt="Along-track macro-scale geophysical comparison from retracked waveform products">
+            <figcaption>Macro-scale product</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/roughness6.png" alt="Along-track roughness comparison from retracked waveform products">
+            <figcaption>Roughness</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/amp6.png" alt="Along-track amplitude comparison from retracked waveform products">
+            <figcaption>Amplitude</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="showcase-card showcase-video">
+        <div class="showcase-copy">
+          <p class="eyebrow">Demo</p>
+          <h2>Along-track reconstruction</h2>
+          <p>A compact animation demonstrates how generated waveform products vary along the Sentinel-3 track.</p>
+        </div>
+        <video controls preload="metadata" playsinline poster="assets/img/alongnew_poster.png">
+          <source src="assets/video/alongnew.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </article>
+    </section>
   </main>
 
   <script src="assets/js/site.js"></script>

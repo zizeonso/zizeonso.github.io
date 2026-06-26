@@ -34,12 +34,19 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    url("../img/seaicebg.png") center bottom / min(1500px, 100vw) auto fixed no-repeat,
+    var(--bg);
   color: var(--text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 1.68;
 }
+
+:root[data-theme="dark"] body {
+  background: var(--bg);
+}
+
 
 a {
   color: var(--accent-strong);
@@ -125,21 +132,22 @@ a:hover {
 
 .profile {
   position: sticky;
-  top: 96px;
+  top: 130px;
   align-self: start;
   padding-top: 8px;
   text-align: center;
 }
 
 .avatar {
-  width: 188px;
-  height: 148px;
+  width: 172px;
+  height: 172px;
   display: block;
   margin: 0 auto 20px;
-  border-radius: 18px;
-  object-fit: contain;
+  border-radius: 50%;
+  object-fit: cover;
   background: #ffffff;
-  box-shadow: 0 12px 28px var(--shadow);
+  border: 3px solid var(--surface);
+  box-shadow: 0 0 0 1px var(--border), 0 12px 28px var(--shadow);
 }
 
 .profile h1 {
@@ -361,9 +369,9 @@ p {
 }
 
 .detail-page {
-  width: min(1200px, calc(100% - 48px));
+  width: min(1080px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 56px 0 64px;
+  padding: 48px 0 58px;
 }
 
 .detail-header {
@@ -371,9 +379,9 @@ p {
 }
 
 .detail-header h1 {
-  max-width: 900px;
+  max-width: 880px;
   margin: 0 0 10px;
-  font-size: 34px;
+  font-size: 32px;
   line-height: 1.15;
 }
 
@@ -383,41 +391,17 @@ p {
   font-size: 14px;
 }
 
-.research-detail {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.92fr);
-  gap: 34px;
-  align-items: start;
-}
-
-.research-detail figure {
-  margin: 8px 0 0;
-}
-
-.research-detail img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-}
-
-.research-detail figcaption {
-  max-width: 88%;
-  margin: 10px auto 0;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.45;
-  text-align: center;
-}
-
 .abstract-panel {
   margin-top: 8px;
-  padding: 18px;
+  padding: 18px 20px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--surface);
   box-shadow: 0 8px 18px var(--shadow);
+}
+
+.abstract-wide {
+  margin-top: 24px;
 }
 
 .abstract-panel p {
@@ -439,6 +423,94 @@ p {
   color: var(--accent-strong);
   font-size: 12px;
   font-weight: 800;
+}
+
+.research-showcase {
+  display: grid;
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.showcase-card {
+  overflow: hidden;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  box-shadow: 0 14px 34px var(--shadow);
+}
+
+.showcase-copy {
+  max-width: 760px;
+  margin-bottom: 18px;
+}
+
+.showcase-copy h2 {
+  margin-bottom: 8px;
+  font-size: 22px;
+}
+
+.showcase-copy p:not(.eyebrow) {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.showcase-card figure {
+  margin: 0;
+}
+
+.showcase-card img,
+.showcase-card video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.compact-figure img {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.showcase-wide img {
+  max-width: 860px;
+  max-height: 420px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.paired-figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.result-pair figure {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.result-pair img {
+  border: 0;
+  border-radius: 8px;
+}
+
+.paired-figures figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.showcase-video video {
+  max-width: 780px;
+  margin: 0 auto;
 }
 
 .publications {
@@ -592,8 +664,8 @@ p {
   }
 
   .avatar {
-    width: 168px;
-    height: 120px;
+    width: 142px;
+    height: 142px;
   }
 
   .research-list {
@@ -608,7 +680,16 @@ p {
     width: 100%;
   }
 
-  .research-detail {
+  .research-showcase {
+    gap: 18px;
+  }
+
+  .showcase-card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .paired-figures {
     grid-template-columns: 1fr;
   }
 
