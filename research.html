@@ -6,7 +6,7 @@
   <title>Research | Zijin Su</title>
   <meta name="description" content="Research abstract for deep learning based radar altimetry echo generation in sea ice surface image recognition.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/site.css?v=20260821-3">
 </head>
 <body class="research-page">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -73,26 +73,52 @@
 
       <article class="showcase-card">
         <div class="showcase-copy">
-          <p class="eyebrow">Surface Properties</p>
-          <h2>Retracked geophysical consistency</h2>
-          <p>Generated waveforms are evaluated through downstream retracking, linking waveform shape to along-track physical variables.</p>
+          <p class="eyebrow">Waveform Metrics</p>
+          <h2>Waveform morphology consistency</h2>
+          <p>Generated and observed echoes are compared through retracker-relevant waveform descriptors across sea-ice and lead samples.</p>
         </div>
         <div class="paired-figures result-pair">
           <figure>
-            <img src="assets/img/ssh10.png" alt="Along-track sea surface height comparison from retracked waveform products">
-            <figcaption>Sea surface height</figcaption>
+            <img src="assets/img/lew3.png" alt="Comparison of real and simulated leading-edge width for sea-ice and lead waveforms">
+            <figcaption>Leading-edge width</figcaption>
           </figure>
           <figure>
-            <img src="assets/img/macroto10.png" alt="Along-track macro-scale geophysical comparison from retracked waveform products">
-            <figcaption>Macro-scale product</figcaption>
+            <img src="assets/img/tew3.png" alt="Comparison of real and simulated trailing-edge width for sea-ice and lead waveforms">
+            <figcaption>Trailing-edge width</figcaption>
           </figure>
           <figure>
-            <img src="assets/img/roughness10.png" alt="Along-track roughness comparison from retracked waveform products">
+            <img src="assets/img/pp3.png" alt="Comparison of real and simulated pulse peakiness for sea-ice and lead waveforms">
+            <figcaption>Pulse peakiness</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/retrack3.png" alt="Comparison of real and simulated retrack positions for sea-ice and lead waveforms">
+            <figcaption>Retrack position</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="showcase-card">
+        <div class="showcase-copy">
+          <p class="eyebrow">Geophysical Retrieval</p>
+          <h2>Retracked geophysical consistency</h2>
+          <p>Generated waveforms are evaluated through downstream retracking to test whether their derived surface properties remain physically consistent.</p>
+        </div>
+        <div class="paired-figures result-pair">
+          <figure>
+            <img src="assets/img/sshff.png" alt="Comparison of real and simulated sea surface height anomaly for sea-ice and lead waveforms">
+            <figcaption>Sea surface height anomaly</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/macrotofff.png" alt="Comparison of real and simulated macro-topography for sea-ice and lead waveforms">
+            <figcaption>Macro-topography</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/roughnessffff.png" alt="Comparison of real and simulated surface roughness for sea-ice and lead waveforms">
             <figcaption>Roughness</figcaption>
           </figure>
           <figure>
-            <img src="assets/img/amp10.png" alt="Along-track amplitude comparison from retracked waveform products">
-            <figcaption>Amplitude</figcaption>
+            <img src="assets/img/ampffac.png" alt="Comparison of real and simulated waveform peak amplitude for sea-ice and lead waveforms">
+            <figcaption>Peak amplitude</figcaption>
           </figure>
         </div>
       </article>
