@@ -29,18 +29,36 @@
 }
 
 html {
+  background: var(--bg);
   scroll-behavior: smooth;
 }
 
 body {
+  position: relative;
+  isolation: isolate;
   margin: 0;
-  background:
-    url("../img/seaicebg-day-v2.png") center bottom / min(1500px, 100vw) auto fixed no-repeat,
-    var(--bg);
+  background: transparent;
   color: var(--text);
   font-family: "Avenir Next", Avenir, "Helvetica Neue", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 14px;
+  line-height: 1.62;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+  height: 100lvh;
+  background:
+    url("../img/seaicebg-day-v2.png") center bottom / min(1500px, 100vw) auto no-repeat,
+    var(--bg);
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 h1,
@@ -50,9 +68,9 @@ h3 {
   font-weight: 600;
 }
 
-:root[data-theme="dark"] body {
+:root[data-theme="dark"] body::before {
   background:
-    url("../img/seaicebg-night.png") center bottom / min(1500px, 100vw) auto fixed no-repeat,
+    url("../img/seaicebg-night.png") center bottom / min(1500px, 100vw) auto no-repeat,
     var(--bg);
 }
 
@@ -108,7 +126,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 16px;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .nav-links a {
@@ -161,14 +179,14 @@ a:hover {
 
 .profile h1 {
   margin: 0;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 1.16;
 }
 
 .role {
   margin: 9px 0 6px;
   color: var(--accent);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -176,7 +194,7 @@ a:hover {
   max-width: 240px;
   margin: 0 auto;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.55;
 }
 
@@ -215,7 +233,7 @@ a:hover {
   border-radius: 999px;
   background: var(--surface);
   color: var(--accent-strong);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -245,7 +263,7 @@ a:hover {
 .eyebrow {
   margin: 0 0 10px;
   color: var(--accent);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -253,13 +271,13 @@ a:hover {
 
 h2 {
   margin: 0 0 16px;
-  font-size: 22px;
+  font-size: 21px;
   line-height: 1.25;
 }
 
 h3 {
   margin: 0 0 6px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.35;
 }
 
@@ -268,7 +286,7 @@ p {
 }
 
 .intro p {
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .news-list,
@@ -288,7 +306,7 @@ p {
 .news-list time,
 .timeline time {
   color: var(--accent);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -304,7 +322,7 @@ p {
   border-radius: 999px;
   background: var(--soft);
   color: var(--accent-strong);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -337,13 +355,13 @@ p {
 
 .research-list p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .research-list .research-status {
   margin-bottom: 6px;
   color: var(--accent-strong);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -363,7 +381,7 @@ p {
 .research-feature figcaption {
   margin-top: 8px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.45;
 }
 
@@ -381,7 +399,7 @@ p {
 }
 
 .text-link {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
 }
 
@@ -398,14 +416,14 @@ p {
 .detail-header h1 {
   max-width: 880px;
   margin: 0 0 10px;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 1.15;
 }
 
 .detail-meta {
   margin: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .abstract-panel {
@@ -422,8 +440,10 @@ p {
 }
 
 .abstract-panel p {
+  max-width: 980px;
   color: var(--muted);
   font-size: 14px;
+  line-height: 1.65;
 }
 
 .detail-tags {
@@ -438,7 +458,7 @@ p {
   border-radius: 999px;
   background: var(--soft);
   color: var(--accent-strong);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 }
 
@@ -464,13 +484,13 @@ p {
 
 .showcase-copy h2 {
   margin-bottom: 8px;
-  font-size: 21px;
+  font-size: 20px;
 }
 
 .showcase-copy p:not(.eyebrow) {
   margin-bottom: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .showcase-card figure {
@@ -520,7 +540,7 @@ p {
 .paired-figures figcaption {
   margin-top: 8px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
   text-align: center;
 }
@@ -579,12 +599,12 @@ p {
 .pub-meta {
   margin: 0 0 8px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .pub-note {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .pub-links {
@@ -611,6 +631,10 @@ p {
   object-fit: contain;
 }
 
+:root[data-theme="dark"] .timeline-seal {
+  filter: brightness(1.65) saturate(0.9);
+}
+
 .timeline p {
   margin: 0 0 2px;
   color: var(--muted);
@@ -629,7 +653,7 @@ p {
   margin: 0 auto;
   padding: 0 0 34px 364px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
 }
 
@@ -660,6 +684,14 @@ p {
 @media (max-width: 720px) {
   body {
     font-size: 14px;
+  }
+
+  body::before {
+    background: url("../img/seaicebg-day-mobile.png") center bottom / cover no-repeat;
+  }
+
+  :root[data-theme="dark"] body::before {
+    background-image: url("../img/seaicebg-night-mobile.png");
   }
 
   .topbar {
@@ -711,7 +743,7 @@ p {
   }
 
   .detail-header h1 {
-    font-size: 27px;
+    font-size: 25px;
   }
 
   .news-list li {
