@@ -655,19 +655,22 @@ p {
 
 .timeline {
   display: grid;
-  gap: 18px;
+  gap: 26px;
 }
 
 .timeline article {
   display: grid;
-  grid-template-columns: 52px 1fr;
-  gap: 16px;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
 }
 
 .timeline img {
-  width: 52px;
-  height: 52px;
+  display: block;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
+  object-position: center top;
 }
 
 :root[data-theme="dark"] .timeline-seal {
@@ -675,8 +678,13 @@ p {
 }
 
 .timeline p {
-  margin: 0 0 2px;
+  margin: 0 0 3px;
   color: var(--muted);
+}
+
+.timeline time {
+  display: block;
+  margin-top: 4px;
 }
 
 .plain-list li {
@@ -754,6 +762,16 @@ p {
   .avatar {
     width: 142px;
     height: 142px;
+  }
+
+  .timeline article {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .timeline img {
+    width: 56px;
+    height: 56px;
   }
 
   .research-list {
