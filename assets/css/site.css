@@ -303,6 +303,15 @@ p {
   padding: 6px 0;
 }
 
+.news-list .news-paper {
+  color: var(--accent-strong);
+  font-weight: 500;
+}
+
+.news-list .news-venue {
+  font-weight: 600;
+}
+
 .news-list time,
 .timeline time {
   color: var(--accent);
@@ -353,6 +362,19 @@ p {
   gap: 18px;
 }
 
+.research-teaser--text-only,
+.research-teaser--wide-figure {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.research-teaser figcaption {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .research-list p {
   color: var(--muted);
   font-size: 13px;
@@ -362,8 +384,7 @@ p {
   margin-bottom: 6px;
   color: var(--accent-strong);
   font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .research-feature figure {
@@ -398,9 +419,21 @@ p {
   border-radius: 8px;
 }
 
+.research-teaser--wide-figure figure {
+  width: min(100%, 560px);
+  margin: 0 auto;
+}
+
+.research-teaser--wide-figure img {
+  width: 100%;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+}
+
 .text-link {
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .detail-page {
@@ -582,7 +615,7 @@ p {
   background: var(--accent);
   color: var(--bg);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .publications li:last-child {
@@ -593,13 +626,19 @@ p {
 
 .pub-title {
   margin: 0 0 4px;
-  font-weight: 800;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .pub-meta {
   margin: 0 0 8px;
   color: var(--muted);
   font-size: 13px;
+}
+
+.pub-meta strong,
+.pub-links a {
+  font-weight: 600;
 }
 
 .pub-note {
