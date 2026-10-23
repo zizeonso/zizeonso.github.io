@@ -686,6 +686,12 @@ p {
   object-position: center top;
 }
 
+.timeline .timeline-cuhk img {
+  width: 80px;
+  height: 80px;
+  margin-left: -8px;
+}
+
 :root[data-theme="dark"] .timeline-seal {
   filter: brightness(1.65) saturate(0.9);
 }
@@ -777,6 +783,11 @@ p {
   .timeline img {
     width: 56px;
     height: 56px;
+  }
+
+  .timeline .timeline-cuhk img {
+    width: 72px;
+    height: 72px;
   }
 
   .research-list {
