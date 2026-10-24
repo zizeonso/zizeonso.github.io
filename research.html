@@ -1,34 +1,43 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-scene="mars" data-design="immersive">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Research | Zijin Su</title>
+  <title>Research | Zijin Su | Planetary Remote Sensing</title>
   <meta name="description" content="Research abstract for deep learning based radar altimetry echo generation in sea ice surface image recognition.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/site.css?v=20261011-2">
+  <meta name="color-scheme" content="dark light">
+  <script src="assets/js/planetary-ui-icons.js"></script>
+  <script src="assets/js/planetary.js?v=2"></script>
+  <link rel="stylesheet" href="assets/css/planetary.css?v=9">
 </head>
-<body class="research-page">
+<body class="research-page" id="top">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <nav class="topbar" aria-label="Primary navigation">
-    <a class="brand" href="index.html">Zijin Su</a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="index.html#publications">Publications</a>
-      <a href="assets/cv/final_cv.pdf">CV</a>
-      <a href="index.html#contact">Contact</a>
-      <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">
-        <span aria-hidden="true">☀️</span>
-      </button>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="index.html">Zijin Su<span aria-hidden="true">.</span></a>
+      <nav class="site-nav" id="primaryNav" aria-label="Primary navigation">
+        <a href="index.html#researches">Research</a>
+        <a href="index.html#publications">Publications</a>
+        <a href="index.html#experience">Experience</a>
+      </nav>
+      <div class="header-tools">
+        <a class="cv-link" href="assets/cv/final_cv.pdf"><span data-icon="Download" aria-hidden="true"></span>CV</a>
+        <button id="themeToggle" class="icon-button" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span data-icon="Sun" aria-hidden="true"></span></button>
+        <button id="menuToggle" class="icon-button menu-toggle" type="button" aria-label="Open navigation" title="Open navigation" aria-expanded="false" aria-controls="primaryNav"><span data-icon="Menu" aria-hidden="true"></span></button>
+      </div>
     </div>
-  </nav>
+  </header>
 
-  <main id="main" class="detail-page">
+  <div class="scene-panel" aria-hidden="true"></div>
+
+  <main id="main" class="detail-layout">
+    <a class="back-link" href="index.html#researches"><span data-icon="ArrowLeft" aria-hidden="true"></span>Back to research</a>
     <header class="detail-header">
       <p class="eyebrow">Research</p>
       <h1>Deep Learning for Radar Altimetry Echo Generation in Sea Ice Surface Image Recognition</h1>
-      <p class="detail-meta">Zijin Su<sup>†</sup>, Michel Tsamados<sup>*</sup>, Weibin Chen, Ryan Nichol, Connor Nelson, Stefan Hendricks, and Jack C. Landy. Preparing for submission, 2026. <span class="pub-note"><sup>†</sup>First author; <sup>*</sup>corresponding author.</span></p>
+      <p class="detail-meta">Zijin Su<sup>†</sup>, Michel Tsamados<sup>*</sup>, Weibin Chen, Ryan Nichol, Connor Nelson, Stefan Hendricks, and Jack C. Landy. Preparing for submission, 2026. <span class="publication-note"><sup>†</sup>First author; <sup>*</sup>corresponding author.</span></p>
     </header>
 
     <section class="abstract-panel abstract-wide" aria-label="Research abstract">
@@ -135,8 +144,8 @@
         </video>
       </article>
     </section>
+    <footer class="site-footer"><p>© 2026 Zijin Su. All rights reserved.</p><a class="icon-button" href="#top" aria-label="Back to top" title="Back to top"><span data-icon="ArrowUp" aria-hidden="true"></span></a></footer>
   </main>
 
-  <script src="assets/js/site.js?v=20261011-2"></script>
 </body>
 </html>
