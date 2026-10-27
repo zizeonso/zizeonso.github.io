@@ -13,7 +13,7 @@
   --paper: #f6f7f9;
   --paper-text: #4c5663;
   --paper-line: #dce0e5;
-  --background-image: url("../img/space-preview/lunar-exploration-story-v1.png");
+  --background-image: url("../img/space-preview/earth-orbit-v1.png");
 }
 
 :root[data-theme="light"] {
@@ -37,17 +37,19 @@
 
 :root[data-scene="mars"] { --background-image: url("../img/space-preview/mars-night.png"); }
 :root[data-theme="light"][data-scene="mars"] { --background-image: url("../img/space-preview/mars-day.png"); }
-:root[data-scene="lunar-orbit"] { --background-image: url("../img/space-preview/lunar-exploration-story-v1.png"); --scene-focus: center calc(100% + max(0px, calc(8.44vw - 15lvh))); }
-:root[data-scene="mars-orbit"] { --background-image: url("../img/space-preview/mars-exploration-story-v1.png"); --scene-focus: center calc(100% + max(0px, calc(8.44vw - 15lvh))); }
+:root[data-scene="earth-orbit"] { --background-image: url("../img/space-preview/earth-orbit-v1.png"); }
+:root[data-scene="lunar-orbit"] { --background-image: url("../img/space-preview/luna-orbit-aligned-v1.png"); }
+:root[data-scene="mars-orbit"] { --background-image: url("../img/space-preview/mars-orbit-aligned-v1.png"); }
+/* Limit the exposed planet to roughly the lower quarter, including ultrawide views. */
+:root:is([data-scene="earth-orbit"], [data-scene="lunar-orbit"], [data-scene="mars-orbit"]) { --scene-backdrop: #000000; --scene-focus: center calc(100% + max(7lvh, calc(16.875vw - 23lvh))); }
 :root[data-scene="deep-space"] { --background-image: url("../img/space-preview/deep-space.png"); }
-:root[data-theme="dark"][data-scene="lunar-orbit"] { --scene-wash: linear-gradient(180deg, rgb(6 8 11 / 14%) 0%, rgb(6 8 11 / 20%) 78%, rgb(6 8 11 / 54%) 100%); }
-:root[data-theme="dark"][data-scene="mars-orbit"] { --scene-wash: linear-gradient(180deg, rgb(6 8 11 / 14%) 0%, rgb(6 8 11 / 20%) 78%, rgb(6 8 11 / 54%) 100%); }
 :root[data-theme="dark"][data-scene="deep-space"] { --scene-wash: linear-gradient(180deg, rgb(6 8 11 / 14%) 0%, rgb(6 8 11 / 18%) 60%, rgb(6 8 11 / 44%) 100%); }
+:root[data-theme="dark"]:is([data-scene="earth-orbit"], [data-scene="lunar-orbit"], [data-scene="mars-orbit"]) { --scene-wash: linear-gradient(180deg, rgb(6 8 11 / 14%) 0%, rgb(6 8 11 / 20%) 70%, rgb(6 8 11 / 54%) 100%); }
 
 * { box-sizing: border-box; letter-spacing: 0; }
 html { scroll-behavior: smooth; scrollbar-gutter: stable; background: var(--bg); }
 body { position: relative; isolation: isolate; margin: 0; background: var(--bg); color: var(--text); font-family: "Avenir Next", Avenir, "Helvetica Neue", system-ui, sans-serif; font-size: 14px; line-height: 1.75; }
-.scene-panel { position: fixed; z-index: -2; inset: 0; height: 100vh; height: 100lvh; pointer-events: none; background: var(--bg) var(--background-image) var(--scene-focus, center bottom) / cover no-repeat; transform: translateZ(0); backface-visibility: hidden; }
+.scene-panel { position: fixed; z-index: -2; inset: 0; height: 100vh; height: 100lvh; pointer-events: none; background: var(--scene-backdrop, var(--bg)) var(--background-image) var(--scene-focus, center bottom) / cover no-repeat; transform: translateZ(0); backface-visibility: hidden; }
 .scene-panel::after { content: ""; position: absolute; inset: 0; background: var(--scene-wash); }
 .scene-panel--outgoing { z-index: -1; will-change: opacity; }
 a { color: var(--link); text-decoration: none; text-underline-offset: 4px; }
@@ -83,6 +85,8 @@ img, video { display: block; max-width: 100%; }
   .scene-switch:hover::after { opacity: 1; visibility: visible; }
 }
 .menu-toggle { display: none; }
+.scene-control { display: inline-flex; align-items: center; gap: 6px; }
+.scene-label { display: inline-block; width: 34px; color: var(--subtle); font-size: 10px; line-height: 1; text-align: right; }
 .layout { display: grid; grid-template-columns: 216px minmax(0, 744px); gap: 80px; width: min(1040px, calc(100% - 96px)); margin: 0 auto; padding: 52px 0 0; }
 .profile { position: sticky; top: 105px; align-self: start; min-width: 0; }
 .avatar { width: 108px; height: 108px; object-fit: cover; border-radius: 50%; background: #ffffff; border: 1px solid #8d99aa; margin-bottom: 22px; }
@@ -326,13 +330,15 @@ sup { font-size: 0.72em; line-height: 0; }
 }
 
 @media (max-aspect-ratio: 3/4) {
+  :root:is([data-scene="earth-orbit"], [data-scene="lunar-orbit"], [data-scene="mars-orbit"]) { --scene-focus: center calc(100% + max(2lvh, calc(44vw - 20lvh))); }
   :root { --background-image: url("../img/space-preview/mars-night-mobile.png"); }
   :root[data-theme="light"] { --background-image: url("../img/space-preview/mars-day-mobile.png"); }
   :root[data-scene="lunar"] { --background-image: url("../img/space-preview/lunar-mobile.png"); }
   :root[data-scene="mars"] { --background-image: url("../img/space-preview/mars-night-mobile.png"); }
   :root[data-theme="light"][data-scene="mars"] { --background-image: url("../img/space-preview/mars-day-mobile.png"); }
-  :root[data-scene="lunar-orbit"] { --background-image: url("../img/space-preview/lunar-exploration-story-v1.png"); --scene-focus: 100% bottom; }
-  :root[data-scene="mars-orbit"] { --background-image: url("../img/space-preview/mars-exploration-story-v1.png"); }
+  :root[data-scene="earth-orbit"] { --background-image: url("../img/space-preview/earth-orbit-mobile-v1.png"); }
+  :root[data-scene="lunar-orbit"] { --background-image: url("../img/space-preview/luna-orbit-aligned-mobile-v1.png"); }
+  :root[data-scene="mars-orbit"] { --background-image: url("../img/space-preview/mars-orbit-aligned-mobile-v1.png"); }
   :root[data-scene="deep-space"] { --background-image: url("../img/space-preview/deep-space.png"); --scene-focus: 100% bottom; }
 }
 

@@ -5,16 +5,27 @@
   const params = new URLSearchParams(location.search);
   const preview = params.get("preview") === "background";
   const key = preview ? "zijin-planetary-background-preview-v1" : "zijin-planetary-v1";
-  const scenePreset = "lunar-exploration-v1";
-  const defaultScene = root.dataset.scene || "lunar-orbit";
+  const scenePreset = "orbital-exploration-v2";
+  const defaultScene = root.dataset.scene || "earth-orbit";
+  const orbitalScenes = [
+    { id: "earth-orbit", name: "Terra", icon: "Orbit", image: "earth-orbit-v1.png", portrait: "earth-orbit-mobile-v1.png" },
+    { id: "lunar-orbit", name: "Luna", icon: "Moon", image: "luna-orbit-aligned-v1.png", portrait: "luna-orbit-aligned-mobile-v1.png" },
+    { id: "mars-orbit", name: "Mars", icon: "Orbit", image: "mars-orbit-aligned-v1.png", portrait: "mars-orbit-aligned-mobile-v1.png" }
+  ];
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(key)) || {}; } catch { /* Storage is optional. */ }
   let theme = params.get("theme") || saved.theme || root.dataset.theme || "dark";
   let scene = params.get("scene") || (saved.scenePreset === scenePreset ? saved.scene : null) || defaultScene;
   theme = theme === "light" ? "light" : "dark";
-  scene = ["mars", "lunar", "lunar-orbit", "mars-orbit", "deep-space"].includes(scene) ? scene : defaultScene;
+  scene = ["earth-orbit", "mars", "lunar", "lunar-orbit", "mars-orbit", "deep-space"].includes(scene) ? scene : defaultScene;
   root.dataset.theme = theme;
   root.dataset.scene = scene;
+
+  function nextScene() {
+    const current = scene === "lunar" ? "lunar-orbit" : scene === "mars" ? "mars-orbit" : scene;
+    const index = orbitalScenes.findIndex(function (item) { return item.id === current; });
+    return orbitalScenes[(index + 1) % orbitalScenes.length];
+  }
 
   function icon(name) {
     const nodes = (window.PlanetaryIcons || {})[name];
@@ -38,6 +49,7 @@
     });
     const toggle = document.getElementById("themeToggle");
     const sceneToggle = document.getElementById("sceneToggle");
+    const sceneName = document.getElementById("sceneName");
     const menu = document.getElementById("menuToggle");
     const navigation = document.getElementById("primaryNav");
 
@@ -52,14 +64,14 @@
         toggle.title = label;
       }
       if (sceneToggle) {
-        const lunar = scene === "lunar-orbit" || scene === "lunar";
-        const graphic = icon(lunar ? "Moon" : "Orbit");
+        const current = orbitalScenes.find(function (item) { return item.id === scene; }) || { name: scene === "lunar" ? "Luna" : "Mars", icon: scene === "lunar" ? "Moon" : "Orbit" };
+        const graphic = icon(current.icon);
         if (graphic) sceneToggle.replaceChildren(graphic);
-        const current = lunar ? "Moon" : "Mars";
-        const next = lunar ? "Mars" : "Moon";
-        sceneToggle.setAttribute("aria-label", `${current} scene. Switch to ${next}`);
+        const next = nextScene();
+        sceneToggle.setAttribute("aria-label", `${current.name} scene. Switch to ${next.name}`);
         sceneToggle.removeAttribute("title");
-        sceneToggle.dataset.tooltip = `${current} / Switch to ${next}`;
+        sceneToggle.dataset.tooltip = `${current.name} / Switch to ${next.name}`;
+        if (sceneName) sceneName.textContent = current.name;
       }
       try { localStorage.setItem(key, JSON.stringify({ theme, scene, scenePreset })); } catch { /* Keep the current page usable without storage. */ }
       const url = new URL(location.href);
@@ -112,19 +124,19 @@
     setupFigures();
 
     function setupSceneSwitch() {
-      const artwork = {
-        "lunar-orbit": "assets/img/space-preview/lunar-exploration-story-v1.png",
-        "mars-orbit": "assets/img/space-preview/mars-exploration-story-v1.png"
-      };
       const images = new Map();
       let switching = false;
 
-      function nextScene() {
-        return scene === "lunar-orbit" || scene === "lunar" ? "mars-orbit" : "lunar-orbit";
+      function imageURL(value) {
+        const entry = orbitalScenes.find(function (item) { return item.id === value; });
+        const portrait = window.matchMedia?.("(max-aspect-ratio: 3/4)").matches;
+        const filename = portrait && entry.portrait ? entry.portrait : entry.image;
+        return new URL(`assets/img/space-preview/${filename}`, location.href).href;
       }
 
       function prepare(value) {
-        if (images.has(value)) return images.get(value);
+        const url = imageURL(value);
+        if (images.has(url)) return images.get(url);
         const image = new Image();
         image.decoding = "async";
         const ready = new Promise(function (resolve, reject) {
@@ -134,22 +146,22 @@
             image.onload = null;
             image.onerror = null;
             if (error) reject(error);
-            else resolve(image);
+            else resolve({ image, url });
           }
           image.onload = function () {
             const decoded = image.decode ? image.decode() : Promise.resolve();
             decoded.then(function () { finish(); }, finish);
           };
           image.onerror = function () { finish(new Error("Scene image unavailable")); };
-          image.src = new URL(artwork[value], location.href).href;
+          image.src = url;
         });
-        images.set(value, ready);
-        ready.catch(function () { images.delete(value); });
+        images.set(url, ready);
+        ready.catch(function () { images.delete(url); });
         return ready;
       }
 
-      sceneToggle.addEventListener("pointerenter", function () { prepare(nextScene()).catch(function () {}); });
-      sceneToggle.addEventListener("focus", function () { prepare(nextScene()).catch(function () {}); });
+      sceneToggle.addEventListener("pointerenter", function () { prepare(nextScene().id).catch(function () {}); });
+      sceneToggle.addEventListener("focus", function () { prepare(nextScene().id).catch(function () {}); });
       sceneToggle.addEventListener("click", async function () {
         if (switching) return;
         switching = true;
@@ -158,8 +170,9 @@
         let outgoing;
         let animation;
         try {
-          const target = nextScene();
-          await prepare(target);
+          const target = nextScene().id;
+          let ready;
+          do { ready = await prepare(target); } while (ready.url !== imageURL(target));
           const panel = document.querySelector(".scene-panel");
           const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
           // Freeze the old frame above the decoded new scene; only opacity changes.
@@ -177,7 +190,7 @@
           scene = target;
           sync();
           if (outgoing) {
-            animation = outgoing.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1200, easing: "cubic-bezier(0.4, 0, 0.2, 1)", fill: "forwards" });
+            animation = outgoing.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1400, easing: "cubic-bezier(0.45, 0, 0.2, 1)", fill: "forwards" });
             await animation.finished.catch(function () {});
           }
         } catch {
