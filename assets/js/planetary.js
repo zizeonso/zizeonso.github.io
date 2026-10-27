@@ -5,12 +5,14 @@
   const params = new URLSearchParams(location.search);
   const preview = params.get("preview") === "background";
   const key = preview ? "zijin-planetary-background-preview-v1" : "zijin-planetary-v1";
+  const scenePreset = "lunar-exploration-v1";
+  const defaultScene = root.dataset.scene || "lunar-orbit";
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(key)) || {}; } catch { /* Storage is optional. */ }
   let theme = params.get("theme") || saved.theme || root.dataset.theme || "dark";
-  let scene = params.get("scene") || saved.scene || "mars";
+  let scene = params.get("scene") || (saved.scenePreset === scenePreset ? saved.scene : null) || defaultScene;
   theme = theme === "light" ? "light" : "dark";
-  scene = ["mars", "lunar", "lunar-orbit", "mars-orbit", "deep-space"].includes(scene) ? scene : "mars";
+  scene = ["mars", "lunar", "lunar-orbit", "mars-orbit", "deep-space"].includes(scene) ? scene : defaultScene;
   root.dataset.theme = theme;
   root.dataset.scene = scene;
 
@@ -35,17 +37,31 @@
       if (svg) placeholder.replaceWith(svg);
     });
     const toggle = document.getElementById("themeToggle");
+    const sceneToggle = document.getElementById("sceneToggle");
     const menu = document.getElementById("menuToggle");
     const navigation = document.getElementById("primaryNav");
 
     function sync() {
       root.dataset.theme = theme;
-      const graphic = icon(theme === "dark" ? "Sun" : "Moon");
-      if (graphic) toggle.replaceChildren(graphic);
-      const label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
-      toggle.setAttribute("aria-label", label);
-      toggle.title = label;
-      try { localStorage.setItem(key, JSON.stringify({ theme, scene })); } catch { /* Keep the current page usable without storage. */ }
+      root.dataset.scene = scene;
+      if (toggle) {
+        const graphic = icon(theme === "dark" ? "Sun" : "Moon");
+        if (graphic) toggle.replaceChildren(graphic);
+        const label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+        toggle.setAttribute("aria-label", label);
+        toggle.title = label;
+      }
+      if (sceneToggle) {
+        const lunar = scene === "lunar-orbit" || scene === "lunar";
+        const graphic = icon(lunar ? "Moon" : "Orbit");
+        if (graphic) sceneToggle.replaceChildren(graphic);
+        const current = lunar ? "Moon" : "Mars";
+        const next = lunar ? "Mars" : "Moon";
+        sceneToggle.setAttribute("aria-label", `${current} scene. Switch to ${next}`);
+        sceneToggle.removeAttribute("title");
+        sceneToggle.dataset.tooltip = `${current} / Switch to ${next}`;
+      }
+      try { localStorage.setItem(key, JSON.stringify({ theme, scene, scenePreset })); } catch { /* Keep the current page usable without storage. */ }
       const url = new URL(location.href);
       url.searchParams.set("theme", theme);
       url.searchParams.set("scene", scene);
@@ -55,7 +71,7 @@
         if (value.startsWith("#")) return;
         const target = new URL(value, location.href);
         const filename = target.pathname.split("/").pop();
-        if (target.origin !== location.origin || !["index.html", "research.html", "index-planetary-option-c.html", "research-planetary-option-c.html"].includes(filename)) return;
+        if (target.origin !== location.origin || !["index.html", "research.html", "insights.html", "index-planetary-option-c.html", "research-planetary-option-c.html"].includes(filename)) return;
         target.searchParams.set("theme", theme);
         target.searchParams.set("scene", scene);
         if (preview) target.searchParams.set("preview", "background");
@@ -72,7 +88,8 @@
       if (graphic) menu.replaceChildren(graphic);
     }
 
-    toggle.addEventListener("click", function () { theme = theme === "dark" ? "light" : "dark"; sync(); });
+    if (toggle) toggle.addEventListener("click", function () { theme = theme === "dark" ? "light" : "dark"; sync(); });
+    if (sceneToggle) setupSceneSwitch();
     menu.addEventListener("click", function () { setMenu(menu.getAttribute("aria-expanded") !== "true"); });
     navigation.addEventListener("click", function (event) { if (event.target.closest("a")) setMenu(false); });
     document.addEventListener("keydown", function (event) { if (event.key === "Escape" && menu.getAttribute("aria-expanded") === "true") { setMenu(false); menu.focus(); } });
@@ -93,6 +110,88 @@
     }
     sync();
     setupFigures();
+
+    function setupSceneSwitch() {
+      const artwork = {
+        "lunar-orbit": "assets/img/space-preview/lunar-exploration-story-v1.png",
+        "mars-orbit": "assets/img/space-preview/mars-exploration-story-v1.png"
+      };
+      const images = new Map();
+      let switching = false;
+
+      function nextScene() {
+        return scene === "lunar-orbit" || scene === "lunar" ? "mars-orbit" : "lunar-orbit";
+      }
+
+      function prepare(value) {
+        if (images.has(value)) return images.get(value);
+        const image = new Image();
+        image.decoding = "async";
+        const ready = new Promise(function (resolve, reject) {
+          const timeout = setTimeout(function () { finish(new Error("Scene loading timed out")); }, 12000);
+          function finish(error) {
+            clearTimeout(timeout);
+            image.onload = null;
+            image.onerror = null;
+            if (error) reject(error);
+            else resolve(image);
+          }
+          image.onload = function () {
+            const decoded = image.decode ? image.decode() : Promise.resolve();
+            decoded.then(function () { finish(); }, finish);
+          };
+          image.onerror = function () { finish(new Error("Scene image unavailable")); };
+          image.src = new URL(artwork[value], location.href).href;
+        });
+        images.set(value, ready);
+        ready.catch(function () { images.delete(value); });
+        return ready;
+      }
+
+      sceneToggle.addEventListener("pointerenter", function () { prepare(nextScene()).catch(function () {}); });
+      sceneToggle.addEventListener("focus", function () { prepare(nextScene()).catch(function () {}); });
+      sceneToggle.addEventListener("click", async function () {
+        if (switching) return;
+        switching = true;
+        sceneToggle.setAttribute("aria-busy", "true");
+        sceneToggle.setAttribute("aria-disabled", "true");
+        let outgoing;
+        let animation;
+        try {
+          const target = nextScene();
+          await prepare(target);
+          const panel = document.querySelector(".scene-panel");
+          const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+          // Freeze the old frame above the decoded new scene; only opacity changes.
+          if (panel && typeof panel.animate === "function" && !reducedMotion) {
+            const style = getComputedStyle(panel);
+            outgoing = document.createElement("div");
+            outgoing.className = "scene-panel scene-panel--outgoing";
+            outgoing.setAttribute("aria-hidden", "true");
+            ["backgroundImage", "backgroundPosition", "backgroundSize", "backgroundColor", "backgroundRepeat"].forEach(function (property) {
+              outgoing.style[property] = style[property];
+            });
+            outgoing.style.setProperty("--scene-wash", style.getPropertyValue("--scene-wash"));
+            panel.after(outgoing);
+          }
+          scene = target;
+          sync();
+          if (outgoing) {
+            animation = outgoing.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 1200, easing: "cubic-bezier(0.4, 0, 0.2, 1)", fill: "forwards" });
+            await animation.finished.catch(function () {});
+          }
+        } catch {
+          sceneToggle.setAttribute("aria-label", "Scene unavailable. Try switching scenes again");
+          sceneToggle.dataset.tooltip = "Scene unavailable. Try again";
+        } finally {
+          outgoing?.remove();
+          animation?.cancel();
+          switching = false;
+          sceneToggle.setAttribute("aria-busy", "false");
+          sceneToggle.setAttribute("aria-disabled", "false");
+        }
+      });
+    }
   });
 
   function setupFigures() {

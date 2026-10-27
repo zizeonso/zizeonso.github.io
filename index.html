@@ -1,29 +1,30 @@
 <!doctype html>
-<html lang="en" data-theme="dark" data-scene="mars" data-design="immersive">
+<html lang="en" data-theme="dark" data-scene="lunar-orbit" data-design="immersive">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
   <title>Zijin Su | Planetary Remote Sensing</title>
-  <meta name="description" content="Zijin Su. Lunar and Martian remote sensing, scientific machine learning, and planetary exploration.">
+  <meta name="description" content="Zijin Su. Planetary remote sensing, satellite technology, and space technology.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <script src="assets/js/planetary-ui-icons.js"></script>
-  <script src="assets/js/planetary.js?v=2"></script>
-  <link rel="stylesheet" href="assets/css/planetary.css?v=9">
+  <script src="assets/js/planetary-ui-icons.js?v=2"></script>
+  <script src="assets/js/planetary.js?v=5"></script>
+  <link rel="stylesheet" href="assets/css/planetary.css?v=17">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="header-inner">
-      <a class="wordmark" href="#top">Zijin Su<span aria-hidden="true">.</span></a>
+      <a class="wordmark" href="#top">Zijin Su</a>
       <nav class="site-nav" id="primaryNav" aria-label="Primary navigation">
         <a href="#researches">Research</a>
         <a href="#publications">Publications</a>
         <a href="#experience">Experience</a>
+        <a href="insights.html">Insights</a>
       </nav>
       <div class="header-tools">
         <a class="cv-link" href="assets/cv/final_cv.pdf"><span data-icon="Download" aria-hidden="true"></span>CV</a>
-        <button id="themeToggle" class="icon-button" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span data-icon="Sun" aria-hidden="true"></span></button>
+        <button id="sceneToggle" class="icon-button scene-switch" type="button" aria-label="Moon scene. Switch to Mars" title="Moon scene. Switch to Mars" data-tooltip="Moon / Switch to Mars"><span data-icon="Moon" aria-hidden="true"></span></button>
         <button id="menuToggle" class="icon-button menu-toggle" type="button" aria-label="Open navigation" title="Open navigation" aria-expanded="false" aria-controls="primaryNav"><span data-icon="Menu" aria-hidden="true"></span></button>
       </div>
     </div>
@@ -41,11 +42,11 @@
         <p class="profile-role">Prospective PhD Candidate</p>
         <p class="profile-school">The Chinese University of Hong Kong</p>
       </div>
-      <p class="profile-focus">Lunar &amp; Martian remote sensing</p>
+      <p class="profile-focus"><span>Planetary remote sensing</span><span>Satellite &amp; space technology</span></p>
       <p class="profile-alumni"><span>MSci Physics</span>University College London</p>
       <p class="profile-location"><span data-icon="MapPin" aria-hidden="true"></span>London &middot; Hong Kong</p>
+      <a class="profile-email" href="mailto:szijin@outlook.com"><span data-icon="Mail" aria-hidden="true"></span><span>szijin@outlook.com</span></a>
       <div class="profile-links" aria-label="Profile links">
-        <a href="mailto:szijin@outlook.com"><span data-icon="Mail" aria-hidden="true"></span>Email</a>
         <a href="https://github.com/zizeonso"><span data-icon="GitFork" aria-hidden="true"></span>GitHub</a>
         <a href="https://scholar.google.com/"><span data-icon="GraduationCap" aria-hidden="true"></span>Scholar</a>
       </div>
@@ -55,10 +56,10 @@
     <main id="main" class="content">
       <section id="about" class="section intro" aria-labelledby="aboutTitle">
         <h2 id="aboutTitle">About Me</h2>
-        <p>I am a prospective PhD candidate at The Chinese University of Hong Kong, with an MSci in Physics from University College London. My current research focuses on <strong>lunar and Martian remote sensing</strong> and planetary exploration.</p>
+        <p>I am a prospective PhD candidate at The Chinese University of Hong Kong, with an MSci in Physics from University College London. My research interests span <strong>planetary remote sensing, satellite technology, and space technology</strong>.</p>
         <p>I am interested in combining machine learning with physical insight to interpret planetary observations. My previous work spans sea-ice radar altimetry with Dr. Michel Tsamados at UCL's Centre for Polar Observation and Modelling (CPOM), natural-hazard remote sensing, and astronomical image analysis.</p>
         <ul class="topic-list" aria-label="Research interests">
-          <li>Planetary Remote Sensing</li><li>Scientific Machine Learning</li><li>Radar Altimetry</li><li>InSAR</li><li>Natural Hazards</li><li>Astronomical Imaging</li>
+          <li>Planetary Remote Sensing</li><li>Satellite Technology</li><li>Space Technology</li><li>Scientific Machine Learning</li><li>Radar Altimetry</li><li>InSAR</li><li>Natural Hazards</li><li>Astronomical Imaging</li>
         </ul>
       </section>
 
@@ -135,12 +136,12 @@
       <section id="experience" class="section" aria-labelledby="experienceTitle">
         <div class="section-heading"><h2 id="experienceTitle">Education &amp; Experience</h2></div>
         <div class="timeline">
-          <article class="timeline-cuhk"><span class="cuhk-mark"><img src="assets/img/cuhk_logo.png" width="88" height="88" loading="lazy" alt=""></span><div><h3>The Chinese University of Hong Kong</h3><p>Prospective PhD Candidate</p></div></article>
-          <article><img class="timeline-seal" src="assets/img/pku_logo.png" width="56" height="56" loading="lazy" alt=""><div><h3>College of Urban and Environmental Sciences, Peking University</h3><p>Research Assistant, Natural Hazards Remote Sensing Lab (NHRS)</p><p>Supervisor: Prof. Xie Hu</p><time>Sep 2026 - Present</time></div></article>
-          <article><img class="timeline-wordmark" src="assets/img/ucllogo.png" width="56" height="56" loading="lazy" alt=""><div><h3>Centre for Polar Observation and Modelling, UCL</h3><p>Research Assistant, fully AI-driven retracking products for CRISTAL</p><p>Supervisor: Dr. Michel Tsamados</p><time>Jun 2026 - Sep 2026</time></div></article>
-          <article><img class="timeline-wordmark" src="assets/img/ucllogo.png" width="56" height="56" loading="lazy" alt=""><div><h3>Centre for Polar Observation and Modelling, UCL</h3><p>Research Assistant, deep learning for altimetry echo generation</p><p>Supervisor: Dr. Michel Tsamados</p><time>Aug 2025 - Jun 2026</time></div></article>
-          <article><img class="timeline-seal" src="assets/img/thu_logo_transparent.png" width="56" height="56" loading="lazy" alt=""><div><h3>Department of Astronomy, Tsinghua University</h3><p>Research Assistant, JWST data analysis and modelling</p><p>Supervisor: Prof. Zheng Cai</p><p>Co-author of <a href="https://arxiv.org/abs/2609.24588">LATED (arXiv, 2026)</a></p><time>Jun 2025 - Dec 2025</time></div></article>
-          <article><img class="timeline-wordmark" src="assets/img/ucllogo.png" width="56" height="56" loading="lazy" alt=""><div><h3>University College London</h3><p>MSci Physics</p><time>Graduated July 2026</time></div></article>
+          <article class="timeline-cuhk"><span class="institution-mark institution-mark--cuhk"><img src="assets/img/cuhk_logo.png" width="88" height="88" loading="lazy" alt=""></span><div><h3>The Chinese University of Hong Kong</h3><p>Prospective PhD Candidate</p></div></article>
+          <article><span class="institution-mark"><img src="assets/img/pku_logo.png" width="56" height="56" loading="lazy" alt=""></span><div><h3>College of Urban and Environmental Sciences, Peking University</h3><p>Research Assistant, Natural Hazards Remote Sensing Lab (NHRS)</p><p>Supervisor: Prof. Xie Hu</p><time>Sep 2026 - Present</time></div></article>
+          <article><span class="institution-mark institution-mark--wordmark"><img src="assets/img/ucllogo.png" width="64" height="36" loading="lazy" alt=""></span><div><h3>Centre for Polar Observation and Modelling, UCL</h3><p>Research Assistant, fully AI-driven retracking products for CRISTAL</p><p>Supervisor: Dr. Michel Tsamados</p><time>Jun 2026 - Sep 2026</time></div></article>
+          <article><span class="institution-mark institution-mark--wordmark"><img src="assets/img/ucllogo.png" width="64" height="36" loading="lazy" alt=""></span><div><h3>Centre for Polar Observation and Modelling, UCL</h3><p>Research Assistant, deep learning for altimetry echo generation</p><p>Supervisor: Dr. Michel Tsamados</p><time>Aug 2025 - Jun 2026</time></div></article>
+          <article><span class="institution-mark"><img src="assets/img/thu_logo_transparent.png" width="56" height="56" loading="lazy" alt=""></span><div><h3>Department of Astronomy, Tsinghua University</h3><p>Research Assistant, JWST data analysis and modelling</p><p>Supervisor: Prof. Zheng Cai</p><p>Co-author of <a href="https://arxiv.org/abs/2609.24588">LATED (arXiv, 2026)</a></p><time>Jun 2025 - Dec 2025</time></div></article>
+          <article><span class="institution-mark institution-mark--wordmark"><img src="assets/img/ucllogo.png" width="64" height="36" loading="lazy" alt=""></span><div><h3>University College London</h3><p>MSci Physics</p><time>Graduated July 2026</time></div></article>
         </div>
       </section>
 
