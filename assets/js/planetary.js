@@ -8,7 +8,7 @@
   const scenePreset = "orbital-exploration-v2";
   const defaultScene = root.dataset.scene || "earth-orbit";
   const orbitalScenes = [
-    { id: "earth-orbit", name: "Terra", icon: "Orbit", image: "earth-orbit-v1.png", portrait: "earth-orbit-mobile-v1.png" },
+    { id: "earth-orbit", name: "Terra", icon: "Orbit", image: "terra-hong-kong-v1.png", portrait: "terra-hong-kong-mobile-v1.png" },
     { id: "lunar-orbit", name: "Luna", icon: "Moon", image: "luna-orbit-aligned-v1.png", portrait: "luna-orbit-aligned-mobile-v1.png" },
     { id: "mars-orbit", name: "Mars", icon: "Orbit", image: "mars-orbit-aligned-v1.png", portrait: "mars-orbit-aligned-mobile-v1.png" }
   ];

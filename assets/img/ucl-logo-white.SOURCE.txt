@@ -1,0 +1,4 @@
+Official UCL secondary inverted logo.
+Source: https://cdn.ucl.ac.uk/logos/ucl/ucl-logo--secondary-inverted.svg
+Retrieved: 2026-10-28
+The SVG geometry and fills are preserved from the official source.

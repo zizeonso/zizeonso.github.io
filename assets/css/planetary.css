@@ -13,7 +13,7 @@
   --paper: #f6f7f9;
   --paper-text: #4c5663;
   --paper-line: #dce0e5;
-  --background-image: url("../img/space-preview/earth-orbit-v1.png");
+  --background-image: url("../img/space-preview/terra-hong-kong-v1.png");
 }
 
 :root[data-theme="light"] {
@@ -37,7 +37,7 @@
 
 :root[data-scene="mars"] { --background-image: url("../img/space-preview/mars-night.png"); }
 :root[data-theme="light"][data-scene="mars"] { --background-image: url("../img/space-preview/mars-day.png"); }
-:root[data-scene="earth-orbit"] { --background-image: url("../img/space-preview/earth-orbit-v1.png"); }
+:root[data-scene="earth-orbit"] { --background-image: url("../img/space-preview/terra-hong-kong-v1.png"); }
 :root[data-scene="lunar-orbit"] { --background-image: url("../img/space-preview/luna-orbit-aligned-v1.png"); }
 :root[data-scene="mars-orbit"] { --background-image: url("../img/space-preview/mars-orbit-aligned-v1.png"); }
 /* Limit the exposed planet to roughly the lower quarter, including ultrawide views. */
@@ -181,6 +181,8 @@ sup { font-size: 0.72em; line-height: 0; }
 .institution-mark img { flex: 0 0 auto; max-width: none; margin: 0; border-radius: 0; background: transparent; }
 .institution-mark--cuhk img { width: 88px; height: 88px; }
 .institution-mark--wordmark img { width: 64px; height: 36px; }
+.institution-mark--ucl img { width: 48px; height: 14px; }
+:root[data-theme="light"] .institution-mark--ucl img { filter: brightness(0); }
 .timeline h3 { font-size: 13px; margin-bottom: 5px; }
 .timeline p { font-size: 12px; line-height: 1.85; color: var(--muted); }
 .timeline time { display: block; margin-top: 7px; color: var(--accent); font-size: 10px; font-variant-numeric: tabular-nums; }
@@ -307,6 +309,7 @@ sup { font-size: 0.72em; line-height: 0; }
   .institution-mark { height: 64px; }
   .institution-mark--cuhk img { width: 76px; height: 76px; }
   .institution-mark--wordmark img { width: 56px; height: 32px; }
+  .institution-mark--ucl img { width: 42px; height: 12px; }
   .timeline h3 { font-size: 13px; }
   .timeline p { font-size: 12px; }
   .capabilities > div { display: block; padding: 13px 0; }
@@ -336,7 +339,7 @@ sup { font-size: 0.72em; line-height: 0; }
   :root[data-scene="lunar"] { --background-image: url("../img/space-preview/lunar-mobile.png"); }
   :root[data-scene="mars"] { --background-image: url("../img/space-preview/mars-night-mobile.png"); }
   :root[data-theme="light"][data-scene="mars"] { --background-image: url("../img/space-preview/mars-day-mobile.png"); }
-  :root[data-scene="earth-orbit"] { --background-image: url("../img/space-preview/earth-orbit-mobile-v1.png"); }
+  :root[data-scene="earth-orbit"] { --background-image: url("../img/space-preview/terra-hong-kong-mobile-v1.png"); }
   :root[data-scene="lunar-orbit"] { --background-image: url("../img/space-preview/luna-orbit-aligned-mobile-v1.png"); }
   :root[data-scene="mars-orbit"] { --background-image: url("../img/space-preview/mars-orbit-aligned-mobile-v1.png"); }
   :root[data-scene="deep-space"] { --background-image: url("../img/space-preview/deep-space.png"); --scene-focus: 100% bottom; }
