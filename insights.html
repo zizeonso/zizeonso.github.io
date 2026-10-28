@@ -8,8 +8,16 @@
   <meta name="description" content="Exploration notes on planetary remote sensing, satellite technology, and space technology by Zijin Su.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <script src="assets/js/planetary-ui-icons.js?v=2"></script>
-  <script src="assets/js/planetary.js?v=8"></script>
+  <script src="assets/js/orbit-3d-icons.js?v=1"></script>
+  <script src="assets/vendor/three-r160/three.min.js" defer></script>
+  <script src="assets/js/orbit-3d-dynamics.js?v=2" defer></script>
+  <script src="assets/js/orbit-3d-spacecraft.js?v=1" defer></script>
+  <script src="assets/js/orbit-original-art.js?v=1" defer></script>
+  <script src="assets/js/orbit-realistic-spacecraft.js?v=1" defer></script>
+  <script src="assets/js/orbit-3d-preview.js?v=3" defer></script>
+  <script src="assets/js/planetary.js?v=9" defer></script>
   <link rel="stylesheet" href="assets/css/planetary.css?v=22">
+  <link rel="stylesheet" href="assets/css/orbit-3d-preview.css?v=1">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -24,13 +32,14 @@
       </nav>
       <div class="header-tools">
         <a class="cv-link" href="assets/cv/final_cv.pdf"><span data-icon="Download" aria-hidden="true"></span>CV</a>
+        <button id="orbit3DMotionToggle" class="icon-button orbit-3d-motion" type="button" aria-label="Pause scene motion" aria-pressed="false" title="Pause scene motion" disabled><span data-icon="Pause" aria-hidden="true"></span></button>
         <div class="scene-control"><span id="sceneName" class="scene-label" aria-hidden="true">Terra</span><button id="sceneToggle" class="icon-button scene-switch" type="button" aria-label="Terra scene. Switch to Luna" title="Terra scene. Switch to Luna" data-tooltip="Terra / Switch to Luna"><span data-icon="Orbit" aria-hidden="true"></span></button></div>
         <button id="menuToggle" class="icon-button menu-toggle" type="button" aria-label="Open navigation" title="Open navigation" aria-expanded="false" aria-controls="primaryNav"><span data-icon="Menu" aria-hidden="true"></span></button>
       </div>
     </div>
   </header>
 
-  <div class="scene-panel" aria-hidden="true"></div>
+  <div class="scene-panel" aria-hidden="true"><div id="orbit3DStage" class="orbit-3d-stage" aria-hidden="true"></div></div>
 
   <main id="main" class="detail-layout insights-layout">
     <a class="back-link" href="index.html"><span data-icon="ArrowLeft" aria-hidden="true"></span>Back to home</a>

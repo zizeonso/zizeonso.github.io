@@ -124,6 +124,7 @@
     setupFigures();
 
     function setupSceneSwitch() {
+      if (window.Orbit3DPreview?.connect({button: sceneToggle, getScene: function () {return scene;}, setScene: function (value) {scene=value;sync();}, nextScene: function () {return nextScene().id;}})) return;
       const images = new Map();
       let switching = false;
 

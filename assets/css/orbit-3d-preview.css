@@ -1,0 +1,16 @@
+.orbit-3d-stage { position: absolute; inset: 0; overflow: hidden; opacity: 0; pointer-events: none; transition: opacity 1400ms ease; }
+.orbit-3d-stage canvas { display: block; width: 100%; height: 100%; }
+.scene-panel[data-webgl-ready="true"] { background: #000; }
+.scene-panel[data-webgl-ready="true"] .orbit-3d-stage { opacity: 1; }
+.orbit-3d-motion:disabled { opacity: 0.45; cursor: default; }
+.orbit-map-credit { margin-left: auto; color: var(--subtle); font-size: 9px; }
+@media (max-width: 600px) {
+  .site-footer { flex-wrap: wrap; column-gap: 12px; }
+  .orbit-map-credit { margin-left: 0; }
+}
+@media (max-width: 380px) {
+  .scene-label { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-3d-stage { transition: none; }
+}

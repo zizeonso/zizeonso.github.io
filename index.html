@@ -8,8 +8,16 @@
   <meta name="description" content="Zijin Su. Planetary remote sensing, satellite technology, and space technology.">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <script src="assets/js/planetary-ui-icons.js?v=2"></script>
-  <script src="assets/js/planetary.js?v=8"></script>
+  <script src="assets/js/orbit-3d-icons.js?v=1"></script>
+  <script src="assets/vendor/three-r160/three.min.js" defer></script>
+  <script src="assets/js/orbit-3d-dynamics.js?v=2" defer></script>
+  <script src="assets/js/orbit-3d-spacecraft.js?v=1" defer></script>
+  <script src="assets/js/orbit-original-art.js?v=1" defer></script>
+  <script src="assets/js/orbit-realistic-spacecraft.js?v=1" defer></script>
+  <script src="assets/js/orbit-3d-preview.js?v=3" defer></script>
+  <script src="assets/js/planetary.js?v=9" defer></script>
   <link rel="stylesheet" href="assets/css/planetary.css?v=22">
+  <link rel="stylesheet" href="assets/css/orbit-3d-preview.css?v=1">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -24,13 +32,14 @@
       </nav>
       <div class="header-tools">
         <a class="cv-link" href="assets/cv/final_cv.pdf"><span data-icon="Download" aria-hidden="true"></span>CV</a>
+        <button id="orbit3DMotionToggle" class="icon-button orbit-3d-motion" type="button" aria-label="Pause scene motion" aria-pressed="false" title="Pause scene motion" disabled><span data-icon="Pause" aria-hidden="true"></span></button>
         <div class="scene-control"><span id="sceneName" class="scene-label" aria-hidden="true">Terra</span><button id="sceneToggle" class="icon-button scene-switch" type="button" aria-label="Terra scene. Switch to Luna" title="Terra scene. Switch to Luna" data-tooltip="Terra / Switch to Luna"><span data-icon="Orbit" aria-hidden="true"></span></button></div>
         <button id="menuToggle" class="icon-button menu-toggle" type="button" aria-label="Open navigation" title="Open navigation" aria-expanded="false" aria-controls="primaryNav"><span data-icon="Menu" aria-hidden="true"></span></button>
       </div>
     </div>
   </header>
 
-  <div class="scene-panel" aria-hidden="true"></div>
+  <div class="scene-panel" aria-hidden="true"><div id="orbit3DStage" class="orbit-3d-stage" aria-hidden="true"></div></div>
 
   <div class="layout">
     <aside class="profile profile--academic" aria-label="Profile">
@@ -39,8 +48,8 @@
       </div>
       <h1 class="profile-name">Zijin Su</h1>
       <div class="profile-affiliation">
-        <p class="profile-role">Prospective PhD Candidate</p>
-        <p class="profile-school">The Chinese University of Hong Kong</p>
+        <p class="profile-role">PhD Student</p>
+        <p class="profile-school">ISEIS<br>The Chinese University of Hong Kong</p>
       </div>
       <p class="profile-focus"><span>Planetary remote sensing</span><span>Satellite &amp; space technology</span></p>
       <p class="profile-alumni"><span>MSci Physics</span>University College London</p>
@@ -56,7 +65,7 @@
     <main id="main" class="content">
       <section id="about" class="section intro" aria-labelledby="aboutTitle">
         <h2 id="aboutTitle">About Me</h2>
-        <p>I am a prospective PhD candidate at The Chinese University of Hong Kong, with an MSci in Physics from University College London. My research interests span <strong>planetary remote sensing, satellite technology, and space technology</strong>.</p>
+        <p>I am a PhD student at the Institute of Space and Earth Information Science (ISEIS), The Chinese University of Hong Kong, supervised by Prof. Peifeng Ma. I hold an MSci Physics degree from University College London. My research interests span <strong>planetary remote sensing, satellite technology, and space technology</strong>.</p>
         <p>I am interested in combining machine learning with physical insight to interpret planetary observations. My previous work spans sea-ice radar altimetry with Dr. Michel Tsamados at UCL's Centre for Polar Observation and Modelling (CPOM), natural-hazard remote sensing, and astronomical image analysis.</p>
         <ul class="topic-list" aria-label="Research interests">
           <li>Planetary Remote Sensing</li><li>Satellite Technology</li><li>Space Technology</li><li>Scientific Machine Learning</li><li>Radar Altimetry</li><li>InSAR</li><li>Natural Hazards</li><li>Astronomical Imaging</li>
@@ -66,6 +75,7 @@
       <section id="news" class="section" aria-labelledby="newsTitle">
         <div class="section-heading"><h2 id="newsTitle">News</h2></div>
         <ul class="news-list">
+          <li><time datetime="2026-10">Oct 2026</time><span><span class="paper-title">A new manuscript</span> is being prepared for submission to <strong>Geophysical Research Letters (GRL)</strong>.</span></li>
           <li><time datetime="2026-09">Sep 2026</time><span><span class="paper-title">A paper on deep learning for partial differential equations (PDEs)</span> has been submitted to <strong>ICLR 2027</strong>.</span></li>
           <li><time datetime="2026-09">Sep 2026</time><span>Our <a href="https://arxiv.org/abs/2609.24588">LATED methodology paper</a> is now available on arXiv. I contributed as a co-author.</span></li>
           <li><time datetime="2026-07">Jul 2026</time><span><span class="paper-title">“Deep Learning for Radar Altimetry Echo Generation in Sea Ice Surface Image Recognition”</span> submitted to <strong>IOP Machine Learning: Earth</strong> and under review.</span></li>
@@ -93,8 +103,8 @@
           </article>
           <article class="research-entry">
             <p class="entry-kicker">Ongoing</p>
-            <h3>DL4Landslide: Landslide Displacement and Thickness Inversion</h3>
-            <p>Developing deep-learning methods to map landslide surface displacement from multi-temporal elevation data. Combining surface motion, elevation change, and mass conservation to estimate landslide thickness and displaced volume for natural-hazard assessment.</p>
+            <h3>Learning-Based Analysis of Landslide Dynamics</h3>
+            <p>Investigating learning-based methods for analysing terrain change and landslide behaviour, with applications to natural-hazard assessment.</p>
           </article>
           <article class="research-entry research-entry--wide">
             <p class="entry-kicker">arXiv Preprint <span aria-hidden="true">/</span> Co-Author</p>
@@ -136,7 +146,7 @@
       <section id="experience" class="section" aria-labelledby="experienceTitle">
         <div class="section-heading"><h2 id="experienceTitle">Education &amp; Experience</h2></div>
         <div class="timeline">
-          <article class="timeline-cuhk"><span class="institution-mark institution-mark--cuhk"><img src="assets/img/cuhk_logo.png" width="88" height="88" loading="lazy" alt=""></span><div><h3>The Chinese University of Hong Kong</h3><p>Prospective PhD Candidate</p></div></article>
+          <article class="timeline-cuhk"><span class="institution-mark institution-mark--cuhk"><img src="assets/img/cuhk_logo.png" width="88" height="88" loading="lazy" alt=""></span><div><h3>The Chinese University of Hong Kong</h3><p>Institute of Space and Earth Information Science (ISEIS)</p><p>PhD Student</p><p>Supervisor: Prof. Peifeng Ma</p></div></article>
           <article><span class="institution-mark"><img src="assets/img/pku_logo.png" width="56" height="56" loading="lazy" alt=""></span><div><h3>College of Urban and Environmental Sciences, Peking University</h3><p>Research Assistant, Natural Hazards Remote Sensing Lab (NHRS)</p><p>Supervisor: Prof. Xie Hu</p><time>Sep 2026 - Present</time></div></article>
           <article><span class="institution-mark institution-mark--wordmark institution-mark--ucl"><img src="assets/img/ucl-logo-white.svg" width="48" height="14" loading="lazy" alt=""></span><div><h3>Centre for Polar Observation and Modelling, UCL</h3><p>Research Assistant, fully AI-driven retracking products for CRISTAL</p><p>Supervisor: Dr. Michel Tsamados</p><time>Jun 2026 - Sep 2026</time></div></article>
           <article><span class="institution-mark institution-mark--wordmark institution-mark--ucl"><img src="assets/img/ucl-logo-white.svg" width="48" height="14" loading="lazy" alt=""></span><div><h3>Centre for Polar Observation and Modelling, UCL</h3><p>Research Assistant, deep learning for altimetry echo generation</p><p>Supervisor: Dr. Michel Tsamados</p><time>Aug 2025 - Jun 2026</time></div></article>
