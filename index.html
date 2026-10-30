@@ -12,12 +12,15 @@
   <script src="assets/vendor/three-r160/three.min.js" defer></script>
   <script src="assets/js/orbit-3d-dynamics.js?v=2" defer></script>
   <script src="assets/js/orbit-3d-spacecraft.js?v=1" defer></script>
-  <script src="assets/js/orbit-original-art.js?v=1" defer></script>
+  <script src="assets/js/orbit-polar-art-preview.js?v=2" defer></script>
   <script src="assets/js/orbit-realistic-spacecraft.js?v=1" defer></script>
-  <script src="assets/js/orbit-3d-preview.js?v=3" defer></script>
-  <script src="assets/js/planetary.js?v=9" defer></script>
+  <script src="assets/js/orbit-active-spacecraft-preview.js?v=1" defer></script>
+  <script src="assets/js/orbit-3d-preview.js?v=4" defer></script>
+  <script src="assets/js/planetary-polar.js?v=1" defer></script>
   <link rel="stylesheet" href="assets/css/planetary.css?v=22">
-  <link rel="stylesheet" href="assets/css/orbit-3d-preview.css?v=1">
+  <link rel="stylesheet" href="assets/css/orbit-3d-preview.css?v=2">
+  <link rel="stylesheet" href="assets/css/overview-preview.css?v=1">
+  <link rel="stylesheet" href="assets/css/terra-polar-preview.css?v=2">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -32,7 +35,7 @@
       </nav>
       <div class="header-tools">
         <a class="cv-link" href="assets/cv/final_cv.pdf"><span data-icon="Download" aria-hidden="true"></span>CV</a>
-        <button id="orbit3DMotionToggle" class="icon-button orbit-3d-motion" type="button" aria-label="Pause scene motion" aria-pressed="false" title="Pause scene motion" disabled><span data-icon="Pause" aria-hidden="true"></span></button>
+        <button id="orbit3DMotionToggle" class="icon-button orbit-3d-motion" type="button" role="switch" aria-label="Scene motion" aria-checked="false" data-tooltip="Loading scene motion" disabled><span class="motion-switch-track" aria-hidden="true"><span class="motion-switch-thumb"></span></span></button>
         <div class="scene-control"><span id="sceneName" class="scene-label" aria-hidden="true">Terra</span><button id="sceneToggle" class="icon-button scene-switch" type="button" aria-label="Terra scene. Switch to Luna" title="Terra scene. Switch to Luna" data-tooltip="Terra / Switch to Luna"><span data-icon="Orbit" aria-hidden="true"></span></button></div>
         <button id="menuToggle" class="icon-button menu-toggle" type="button" aria-label="Open navigation" title="Open navigation" aria-expanded="false" aria-controls="primaryNav"><span data-icon="Menu" aria-hidden="true"></span></button>
       </div>
@@ -73,20 +76,10 @@
       </section>
 
       <section id="news" class="section" aria-labelledby="newsTitle">
-        <div class="section-heading"><h2 id="newsTitle">News</h2></div>
-        <ul class="news-list">
-          <li><time datetime="2026-10">Oct 2026</time><span><span class="paper-title">A new manuscript</span> is being prepared for submission to <strong>Geophysical Research Letters (GRL)</strong>.</span></li>
-          <li><time datetime="2026-09">Sep 2026</time><span><span class="paper-title">A paper on deep learning for partial differential equations (PDEs)</span> has been submitted to <strong>ICLR 2027</strong>.</span></li>
-          <li><time datetime="2026-09">Sep 2026</time><span>Our <a href="https://arxiv.org/abs/2609.24588">LATED methodology paper</a> is now available on arXiv. I contributed as a co-author.</span></li>
-          <li><time datetime="2026-07">Jul 2026</time><span><span class="paper-title">“Deep Learning for Radar Altimetry Echo Generation in Sea Ice Surface Image Recognition”</span> submitted to <strong>IOP Machine Learning: Earth</strong> and under review.</span></li>
-        </ul>
-        <details class="news-archive">
-          <summary>Earlier updates<span data-icon="ChevronDown" aria-hidden="true"></span></summary>
-          <ul class="news-list">
-            <li><time datetime="2026-07">Jul 2026</time><span>Graduated with an MSci Physics degree from University College London.</span></li>
-            <li><time datetime="2026-06">Jun 2026</time><span><span class="paper-title">Deep learning for sea-ice altimetry echo generation</span> paper preparing for submission.</span></li>
-          </ul>
-        </details>
+        <div class="section-heading"><h2 id="newsTitle">News</h2><a class="section-link" href="news.html">All news<span data-icon="ArrowUpRight" aria-hidden="true"></span></a></div>
+        <ul class="news-list"><li><time datetime="2026-10">Oct 2026</time><span>Joined CUHK ISEIS as a PhD student.</span></li>
+<li><time datetime="2026-10">Oct 2026</time><span>Started work on a new <span class="paper-title">neural-operator framework for thickness inversion</span>.</span></li>
+<li><time datetime="2026-10">Oct 2026</time><span><span class="paper-title">A new manuscript</span> has been submitted to <strong>Geophysical Research Letters (GRL)</strong>.</span></li></ul>
       </section>
 
       <section id="researches" class="section" aria-labelledby="researchTitle">
@@ -120,27 +113,14 @@
       </section>
 
       <section id="publications" class="section" aria-labelledby="publicationsTitle">
-        <div class="section-heading"><h2 id="publicationsTitle">Selected Publications</h2></div>
-        <ol class="publication-list">
-          <li><div class="publication-body">
-            <h3>Deep Learning for Radar Altimetry Echo Generation in Sea Ice Surface Image Recognition</h3>
-            <p><strong>Zijin Su</strong><sup>†</sup>, Michel Tsamados<sup>*</sup>, Weibin Chen, Ryan Nichol, Connor Nelson, Stefan Hendricks, and Jack C. Landy.</p>
-            <p class="publication-venue">Preparing for submission, 2026.</p>
-            <p class="publication-note"><sup>†</sup>First author; <sup>*</sup>corresponding author.</p>
-          </div></li>
-          <li><div class="publication-body">
-            <h3>LATED: Lyα-anchored photometric selection of candidate metal-free and extremely metal-poor star formation from the end of reionisation to cosmic noon</h3>
-            <p>Mingyu Li et al. (including <strong>Zijin Su</strong>).</p>
-            <p class="publication-venue"><em>arXiv</em>, 2026. Co-author; preprint.</p>
-            <div class="publication-links"><a href="https://arxiv.org/abs/2609.24588">arXiv<span data-icon="ArrowUpRight" aria-hidden="true"></span></a><a href="https://arxiv.org/pdf/2609.24588"><span data-icon="FileText" aria-hidden="true"></span>PDF</a></div>
-          </div></li>
-          <li><div class="publication-body">
-            <h3>Based on Data Balancing and Model Improvement for Multi-Label Sentiment Classification Performance Enhancement</h3>
-            <p><strong>Zijin Su</strong><sup>†</sup>, Huanzhu Lv<sup>†</sup>, Yuren Niu, and Yiming Liu.</p>
-            <p class="publication-venue"><em>arXiv</em>, 2024.</p>
-            <p class="publication-note"><sup>†</sup>Co-first authors.</p>
-          </div></li>
-        </ol>
+        <div class="section-heading"><h2 id="publicationsTitle">Selected Publications</h2><a class="section-link" href="publications.html">All publications<span data-icon="ArrowUpRight" aria-hidden="true"></span></a></div>
+        <ol class="publication-list publication-list--selected"><li><div class="publication-body"><h3>Deep Learning for Radar Altimetry Echo Generation in Sea Ice Surface Image Recognition</h3>
+<p><strong>Zijin Su</strong><sup>†</sup>, Michel Tsamados<sup>*</sup>, et al.</p>
+<div class="publication-meta"><p class="publication-venue">Preparing for submission, 2026.</p></div></div></li>
+<li><div class="publication-body"><h3>LATED: Lyα-anchored photometric selection of candidate metal-free and extremely metal-poor star formation from the end of reionisation to cosmic noon</h3>
+<p>Mingyu Li et al. (including <strong>Zijin Su</strong>).</p>
+<div class="publication-meta"><p class="publication-venue"><em>arXiv</em>, 2026. Co-author; preprint.</p><div class="publication-links"><a href="https://arxiv.org/abs/2609.24588">arXiv<span data-icon="ArrowUpRight" aria-hidden="true"></span></a><a href="https://arxiv.org/pdf/2609.24588"><span data-icon="FileText" aria-hidden="true"></span>PDF</a></div></div></div></li></ol>
+        <p class="publication-legend"><sup>†</sup>First author; <sup>*</sup>corresponding author.</p>
       </section>
 
       <section id="experience" class="section" aria-labelledby="experienceTitle">

@@ -1,0 +1,28 @@
+{
+  "generator": "Built-in image_gen",
+  "intent": "Edit the existing Terra artwork non-destructively for a polar background preview.",
+  "outputs": [
+    {
+      "path": "terra-polar-v1.png",
+      "size": [
+        1672,
+        941
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: desktop background for an existing premium academic website. Input image 1 is the EDIT TARGET: an existing 1672x941 Terra/Hong Kong orbital background. Edit only the planetary surface and the immediately adjacent atmospheric limb. Preserve the exact 1672x941 landscape canvas, crop, apparent Earth diameter, limb curvature and position: the highest solid-surface limb remains near y=0.70, with the same left/right curvature and about the bottom 30% of the source occupied by Earth. Do not raise or enlarge the planet; the website crops it to a lower-quarter band. Preserve the nearly black empty sky and the very sparse tiny star positions as closely as possible, leaving the entire upper 65% and the left profile area quiet. Keep the tiny existing spacecraft at its lower-right position and size, and do not add spacecraft. Replace all Hong Kong cities, islands, green subtropical terrain and estuary with a convincing high-oblique ORBITAL VIEW OVER THE ARCTIC: a broad cold-white polar ice cap and extensive Arctic Ocean sea-ice pack, delicate irregular ice-floe patterns, dark deep-blue leads and open-water fractures; an understated Greenland-like glaciated land margin may occupy a small part of the right foreground, not a mountain landscape. Render the texture wrapped naturally onto the curved Earth, not a flat aerial photo or a patchwork map. The scene must read as the polar EARTH, with blue ocean/air, not a gray lunar surface. Atmospheric improvement: a fine pale-white sunlit horizon merging into a clear cool cyan/blue scattering layer and then gradually into black; increase the visible soft atmospheric depth slightly compared with the target so there is a natural translucent luminous layer, about 1.5–2.5% of the canvas height near the central limb, not a thick artificial neon ring. A few wispy low white clouds near the distant limb give depth while keeping most sea-ice structure inspectable. Soft restrained sunlight, matte icy whites, deep ocean blue, natural cloud shadows, photographic detail with the same subtly illustrated cinematic finish as the edit target. Keep the ice gently lit rather than glaring white or pitch-black. No aurora, giant objects, extra planets, nebula, colorful galaxy, lens flare, sun disk, fog covering the sky, city lights, labels, text, grid, borders or watermark. Output ONE full-bleed landscape background, not a website mockup. Preserve the target's composition and minimal star density."
+    },
+    {
+      "path": "terra-polar-mobile-v1.png",
+      "size": [
+        887,
+        1774
+      ],
+      "prompt": "Use case: precise-object-edit. Asset type: matching mobile portrait background for an existing premium academic website. Input image 1 is the EDIT TARGET: the existing 887x1774 mobile Terra/Hong Kong orbital scene. Input image 2 is the NEW DESKTOP ARCTIC EARTH SCENE and supplies the desired polar surface, atmospheric depth, light and color. Edit image 1 only below and immediately around its existing Earth horizon. Preserve the exact 887x1774 1:2 portrait canvas, crop, enormous apparent Earth radius, exact limb curve and height: central solid-surface limb apex around y=0.78 and Earth occupying the bottom 22% of this source image. Do not raise or enlarge Earth. Keep the nearly black upper three quarters almost unchanged with its same extremely sparse tiny stars, no galaxy or nebula, and keep the existing tiny lower-right spacecraft at its original position and size. Do not add any spacecraft. Replace the subtropical Hong Kong landscape with the matching ARCTIC OCEAN AND POLAR ICE from input 2: a broad icy white polar cap merging into intricate but not exaggerated white/blue-gray pack ice floes; dark deep-blue narrow leads and open-water fractures; a little understated Greenland-like glaciated coast can appear on the right, not towering mountains. Wrap the view onto the same curved globe, not a flat image pasted into a circle. Natural clouds remain wispy and secondary, with gently sunlit snow and fine cool shadows. Atmosphere must match input 2: a fine pale-white horizon and an elegant translucent graduated cool cyan-blue layer, with visibly softer depth and scattering than the old image, then a smooth fade to the empty black sky. Keep it restrained, not a thick neon ring, lens flare, or glowing fog. The transition should feel like real orbit photography with a subtly cinematic/illustrated finish matching the website. Preserve quiet sky behind all the profile text. No aurora, additional bodies, giant foreground objects, sun disk, tropical terrain, green/brown continents, cities, labels, text, borders, UI, watermark or device mockup. Output ONE matching full-bleed portrait background, same composition as edit target 1."
+    }
+  ],
+  "editTargets": [
+    "terra-hong-kong-v1.png",
+    "terra-hong-kong-mobile-v1.png"
+  ],
+  "atmosphereReference": "https://science.nasa.gov/earth/earth-observatory/watching-the-world-go-by/",
+  "notes": "AI-generated Arctic concept artwork, not an orbital photograph or a georeferenced scientific product. Broader pale-blue atmospheric scattering is a visual treatment. Original Hong Kong, Luna and Mars artwork and current production pages are preserved. Desktop and portrait files are used unmodified."
+}

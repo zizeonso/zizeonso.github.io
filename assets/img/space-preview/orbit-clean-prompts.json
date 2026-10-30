@@ -1,0 +1,37 @@
+{
+  "generator": "Built-in image_gen",
+  "purpose": "Remove only the fixed spacecraft embedded in each existing background; dynamic spacecraft are rendered separately.",
+  "outputs": [
+    {
+      "path": "terra-polar-clean-v2.png",
+      "editTarget": "terra-polar-v1.png",
+      "prompt": "Use case: precise-object-edit. Input image 1 is the EDIT TARGET, a 1672x941 landscape website orbital background. Remove ONLY the one tiny spacecraft/satellite and its two solar panels embedded near the lower-right sky, immediately above the planetary horizon. Fill that small spacecraft-shaped area with the matching nearly black surrounding sky. Do NOT replace it with another object, star cluster or a blurred smudge. No static spacecraft must remain anywhere in the image. Preserve the exact canvas dimensions and crop, the precise horizon curve and its height, apparent planetary scale, Arctic sea ice, dark-blue ocean and its graduated pale-blue atmosphere, all surface texture and light, sparse stars and the quiet dark upper sky. The only requested change is removing that small lower-right spacecraft; do not repaint or redesign the scene. Preserve the position, brightness and shape of every other visible element as closely as possible. No text, labels, watermark, extra planets, aurora, nebulae, UI or new spacecraft. Output one complete background in the SAME aspect ratio and dimensions as the edit target."
+    },
+    {
+      "path": "terra-polar-clean-mobile-v2.png",
+      "editTarget": "terra-polar-mobile-v1.png",
+      "prompt": "Use case: precise-object-edit. Input image 1 is the EDIT TARGET, a 887x1774 portrait website orbital background. Remove ONLY the one tiny spacecraft/satellite and its two solar panels embedded near the lower-right sky, immediately above the planetary horizon. Fill that small spacecraft-shaped area with the matching nearly black surrounding sky. Do NOT replace it with another object, star cluster or a blurred smudge. No static spacecraft must remain anywhere in the image. Preserve the exact canvas dimensions and crop, the precise horizon curve and its height, apparent planetary scale, Arctic sea ice, dark-blue ocean and its graduated pale-blue atmosphere, all surface texture and light, sparse stars and the quiet dark upper sky. The only requested change is removing that small lower-right spacecraft; do not repaint or redesign the scene. Preserve the position, brightness and shape of every other visible element as closely as possible. No text, labels, watermark, extra planets, aurora, nebulae, UI or new spacecraft. Output one complete background in the SAME aspect ratio and dimensions as the edit target."
+    },
+    {
+      "path": "luna-orbit-clean-v2.png",
+      "editTarget": "luna-orbit-aligned-v1.png",
+      "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET, a 1672x941 landscape lunar orbital website background. Remove ONLY the single tiny spacecraft and its solar panels embedded in the lower-right BLACK SKY just above the Moon's horizon. Replace only the spacecraft-shaped area with seamless matching near-black sky, leaving no satellite, blur smear, ghost, lens flare or replacement object. Preserve the exact image dimensions, aspect ratio, framing, Moon size, horizon shape and height, original crater texture, all shadows, illumination, neutral lunar gray color, extremely sparse star field and large quiet upper sky. Do not add atmosphere to the Moon. Do not repaint any terrain or move the horizon. The scene should be unchanged except that the one small lower-right spacecraft is absent. No new spacecraft, planets, text, UI, watermarks or labels. Output one background at the SAME original dimensions, not a device or website mockup."
+    },
+    {
+      "path": "luna-orbit-clean-mobile-v2.png",
+      "editTarget": "luna-orbit-aligned-mobile-v1.png",
+      "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET, a 887x1774 portrait lunar orbital website background. Remove ONLY the single tiny spacecraft and its solar panels embedded in the lower-right BLACK SKY just above the Moon's horizon. Replace only the spacecraft-shaped area with seamless matching near-black sky, leaving no satellite, blur smear, ghost, lens flare or replacement object. Preserve the exact image dimensions, aspect ratio, framing, Moon size, horizon shape and height, original crater texture, all shadows, illumination, neutral lunar gray color, extremely sparse star field and large quiet upper sky. Do not add atmosphere to the Moon. Do not repaint any terrain or move the horizon. The scene should be unchanged except that the one small lower-right spacecraft is absent. No new spacecraft, planets, text, UI, watermarks or labels. Output one background at the SAME original dimensions, not a device or website mockup."
+    },
+    {
+      "path": "mars-orbit-clean-v2.png",
+      "editTarget": "mars-orbit-aligned-v1.png",
+      "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET, a 1672x941 landscape Mars orbital background for a premium academic website. Remove ONLY the one small spacecraft with solar panels in the lower-right black sky just above the Mars horizon. Fill that exact small spacecraft area with seamless matching nearly black sky. Leave no static spacecraft, replacement object, blur patch, glowing residue or additional star cluster. Preserve the exact canvas dimensions, aspect ratio, crop, Mars apparent size, original horizon curve and height, warm peach atmospheric rim, ochre rocky surface, crater/canyon details and sunlight, sparse tiny stars, and quiet upper sky. This is object removal only, not a redesign. Do not move or repaint the planet, increase the atmosphere, change exposure or alter the palette. No new spacecraft, planets, text, labels, watermark, UI or mockup. Output one complete background with the SAME original framing and dimensions, with only the small fixed spacecraft absent."
+    },
+    {
+      "path": "mars-orbit-clean-mobile-v2.png",
+      "editTarget": "mars-orbit-aligned-mobile-v1.png",
+      "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET, a 887x1774 portrait Mars orbital background for a premium academic website. Remove ONLY the one small spacecraft with solar panels in the lower-right black sky just above the Mars horizon. Fill that exact small spacecraft area with seamless matching nearly black sky. Leave no static spacecraft, replacement object, blur patch, glowing residue or additional star cluster. Preserve the exact canvas dimensions, aspect ratio, crop, Mars apparent size, original horizon curve and height, warm peach atmospheric rim, ochre rocky surface, crater/canyon details and sunlight, sparse tiny stars, and quiet upper sky. This is object removal only, not a redesign. Do not move or repaint the planet, increase the atmosphere, change exposure or alter the palette. No new spacecraft, planets, text, labels, watermark, UI or mockup. Output one complete background with the SAME original framing and dimensions, with only the small fixed spacecraft absent."
+    }
+  ],
+  "notes": "Decorative generated concept illustrations, not georeferenced or actual orbital photographs. Source backgrounds are preserved. All edited PNG outputs are used without raster modification."
+}

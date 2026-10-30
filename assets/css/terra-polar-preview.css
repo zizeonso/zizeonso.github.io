@@ -1,0 +1,13 @@
+:root[data-scene="earth-orbit"] {
+  --background-image: url("../img/space-preview/terra-polar-clean-v2.png");
+}
+:root[data-scene="lunar-orbit"] { --background-image: url("../img/space-preview/luna-orbit-clean-v2.png"); }
+:root[data-scene="mars-orbit"] { --background-image: url("../img/space-preview/mars-orbit-clean-v2.png"); }
+
+@media (max-aspect-ratio: 3/4) {
+  :root[data-scene="earth-orbit"] {
+    --background-image: url("../img/space-preview/terra-polar-clean-mobile-v2.png");
+  }
+  :root[data-scene="lunar-orbit"] { --background-image: url("../img/space-preview/luna-orbit-clean-mobile-v2.png"); }
+  :root[data-scene="mars-orbit"] { --background-image: url("../img/space-preview/mars-orbit-clean-mobile-v2.png"); }
+}

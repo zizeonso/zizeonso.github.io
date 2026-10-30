@@ -1,0 +1,52 @@
+.section-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  min-height: 32px;
+  color: var(--subtle);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.section-link .icon {
+  width: 13px;
+  height: 13px;
+  flex-basis: 13px;
+}
+
+.publication-list--selected > li {
+  padding: 19px 0;
+}
+
+.publication-list--selected > li:first-child { padding-top: 0; }
+.publication-list--selected > li:last-child { padding-bottom: 0; }
+.publication-list--selected h3 { font-size: 14px; line-height: 1.6; margin-bottom: 7px; }
+.publication-list--selected .publication-body > p { font-size: 12px; line-height: 1.8; }
+.publication-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; margin-top: 7px; }
+.publication-meta .publication-venue { margin-top: 0; font-size: 12px; line-height: 1.8; }
+.publication-meta .publication-links a { margin-top: 0; }
+.publication-legend { margin-top: 19px; color: var(--subtle); font-size: 11px; line-height: 1.8; }
+.archive-layout { max-width: 920px; }
+.archive-header { margin-bottom: 29px; }
+.archive-count { margin-top: 7px; color: var(--subtle); font-size: 12px; }
+.archive-year { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 24px; padding: 27px 0; border-top: 1px solid var(--line); scroll-margin-top: 82px; }
+.archive-year > h2 { color: var(--accent); font-size: 13px; font-weight: 500; line-height: 1.85; }
+.archive-year .news-list li { grid-template-columns: 74px minmax(0, 1fr); margin-bottom: 20px; }
+.archive-year .news-list li:last-child { margin-bottom: 0; }
+.archive-year .publication-list > li { padding: 23px 0; }
+.archive-year .publication-list > li:first-child { padding-top: 0; }
+.archive-year .publication-list > li:last-child { padding-bottom: 0; }
+.archive-year .publication-body h3 { font-size: 14px; }
+.archive-layout > .site-footer { border-top: 1px solid var(--line); }
+
+@media (max-width: 600px) {
+  .section-heading { gap: 12px; align-items: center; }
+  .section-link { min-height: 44px; }
+  .publication-list--selected h3 { font-size: 13px; }
+  .publication-list--selected .publication-body > p { font-size: 13px; }
+  .publication-meta { gap: 6px 16px; }
+  .archive-year { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 23px 0; }
+  .archive-year .news-list li { grid-template-columns: 59px minmax(0, 1fr); }
+  .archive-year .publication-body h3 { font-size: 13px; }
+}

@@ -207,15 +207,17 @@
     const button = document.getElementById("orbit3DMotionToggle");
     const stopped = paused || motion.matches;
     button.disabled = !current || motion.matches || contextLost;
-    button.setAttribute("aria-pressed", String(stopped));
-    const label = motion.matches ? "Motion reduced by system preferences" : originalArt ? (paused ? "Resume scene motion" : "Pause scene motion") : paused ? "Resume orbital motion and planet rotation" : "Pause orbital motion and planet rotation";
-    button.setAttribute("aria-label", label); button.title = label;
-    const nodes = window.PlanetaryIcons?.[stopped ? "Play" : "Pause"];
-    if (nodes) {
-      const namespace = "http://www.w3.org/2000/svg", icon = document.createElementNS(namespace, "svg");
-      Object.entries({ viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", "stroke-width": "1.6", "stroke-linecap": "round", "stroke-linejoin": "round", class: "icon", "aria-hidden": "true" }).forEach(function ([key, value]) { icon.setAttribute(key, value); });
-      nodes.forEach(function ([tag, attributes]) { const item = document.createElementNS(namespace, tag); Object.entries(attributes).forEach(function ([key, value]) { item.setAttribute(key, value); }); icon.appendChild(item); });
-      button.replaceChildren(icon);
+    button.setAttribute("role", "switch");
+    button.setAttribute("aria-label", "Scene motion");
+    button.setAttribute("aria-checked", String(!!current && !stopped && !contextLost));
+    button.removeAttribute("aria-pressed");
+    button.removeAttribute("title");
+    button.dataset.tooltip = motion.matches ? "Motion reduced by system preferences" : contextLost ? "Scene motion unavailable" : paused ? "Turn scene motion on" : "Turn scene motion off";
+    if (!button.dataset.motionSwitchReady) {
+      const track = document.createElement("span"), thumb = document.createElement("span");
+      track.className = "motion-switch-track"; track.setAttribute("aria-hidden", "true");
+      thumb.className = "motion-switch-thumb"; track.appendChild(thumb);
+      button.replaceChildren(track); button.dataset.motionSwitchReady = "true";
     }
     if (stopped || document.hidden || contextLost) { if (raf) cancelAnimationFrame(raf); raf = 0; previousTime = 0; }
     schedule();
