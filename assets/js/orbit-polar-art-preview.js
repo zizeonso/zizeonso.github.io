@@ -9,7 +9,7 @@
   };
   const payloads = new Map();
   function orientation() { return window.matchMedia("(max-aspect-ratio: 3/4)").matches ? "portrait" : "desktop"; }
-  function key(id) { return `${id}/${orientation()}`; }
+  function key(id, format = orientation()) { return `${id}/${format}`; }
   function record(value) { const [id, format] = value.split("/"); return records[id][format]; }
   function curve(value) {
     const [left, center, right] = record(value).limb;

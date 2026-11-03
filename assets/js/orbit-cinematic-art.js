@@ -35,9 +35,8 @@
     const horizon = u => { const d = u - 0.5; return fit.curve.center + fit.curve.quadratic * d * d + fit.curve.linear * d; };
     const depth = imageY - horizon(u) - motion.lift;
     const ground = smooth(0, 0.16, depth);
-    const edge = smooth(0, 0.085, u) * (1 - smooth(0.915, 1, u));
-    const curve = Math.sqrt(Math.max(0.1, 1 - (u - 0.5) ** 2 * 2.2));
-    const planetU = u + motion.drift * ground * edge * curve;
+    const horizontal = 2 * u - 1, offset = 2 * motion.drift * ground;
+    const planetU = 0.5 + 0.5 * (horizontal + offset) / (1 + offset * horizontal);
     const planetY = horizon(planetU) + depth * (1 - motion.approach);
     return { u, v: 1 - imageY, planetU, planetV: 1 - planetY, depth, layer: smooth(-0.045, 0.02, depth) };
   }
@@ -96,9 +95,10 @@ void main() {
   // Leave the distant sky unchanged; advect only the curved foreground layer.
   if (depth > -0.045) {
     float ground = smoothstep(0.0, 0.16, depth);
-    float edge = smoothstep(0.0, 0.085, uv.x) * (1.0 - smoothstep(0.915, 1.0, uv.x));
-    float d = uv.x - 0.5;
-    float u = uv.x + travel.x * ground * edge * sqrt(max(0.1, 1.0 - d * d * 2.2));
+    // A monotonic warp fixes both image edges, avoiding compressed/folded strips.
+    float x = 2.0 * uv.x - 1.0;
+    float offset = 2.0 * travel.x * ground;
+    float u = 0.5 + 0.5 * (x + offset) / (1.0 + offset * x);
     float v = 1.0 - (horizon(u) + depth * (1.0 - travel.z));
     vec3 surface = texture2D(artwork, clamp(vec2(u, v), vec2(0.001), vec2(0.999))).rgb;
     float layer = smoothstep(-0.045, 0.02, depth);

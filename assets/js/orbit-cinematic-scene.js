@@ -10,9 +10,30 @@
   let renderer, stage, panel, camera, controls, current, transition, targets, blend;
   let width = 0, height = 0, pixelRatio = 0, frame, elapsed = 0, previousTime = 0, lastRender = 0, raf = 0;
   let paused = false, contextLost = false, busy = false, textRects = [];
+  let viewportReady = false, starting = false;
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const tangent = new T.Vector3(), radial = new T.Vector3(), normal = new T.Vector3();
   const basis = new T.Matrix4(), projected = new T.Vector3();
+
+  function artworkKey(id) {
+    const format = viewportReady ? (width / height <= 0.75 ? "portrait" : "desktop") : originalArt.orientation();
+    return originalArt.key(id, format);
+  }
+
+  function syncBlendTargets() {
+    const size = transition ? renderer.getDrawingBufferSize(new T.Vector2()) : { x: 1, y: 1 };
+    targets.forEach(function (target) {
+      if (target.width !== size.x || target.height !== size.y) target.setSize(size.x, size.y);
+    });
+  }
+
+  function finishTransition() {
+    if (!transition) return;
+    const complete = transition.complete;
+    transition = null;
+    syncBlendTargets();
+    complete();
+  }
 
   function loadTexture(key) {
     if (!texturePromises.has(key)) {
@@ -55,7 +76,7 @@
   }
 
   async function makeWorld(id) {
-    const cacheKey = originalArt ? originalArt.key(id) : id;
+    const cacheKey = originalArt ? artworkKey(id) : id;
     if (worlds.has(cacheKey)) return worlds.get(cacheKey);
     const settings = D.scenes[id];
     if (!settings) throw new Error("Unsupported scene");
@@ -98,7 +119,7 @@
 
   async function prepareWorld(id) {
     let world;
-    do { world = await makeWorld(id); } while (originalArt && world.art.value !== originalArt.key(id));
+    do { world = await makeWorld(id); } while (originalArt && world.art.value !== artworkKey(id));
     return world;
   }
 
@@ -145,7 +166,7 @@
   }
 
   function render(delta = 0) {
-    if (!current || contextLost) return;
+    if (!current || contextLost || !viewportReady || document.hidden) return;
     updateWorld(current, delta);
     if (transition) {
       updateWorld(transition.from, delta);
@@ -158,7 +179,7 @@
   }
 
   function schedule() {
-    if (!raf && !document.hidden && !contextLost && (transition || (!paused && !motion.matches))) raf = requestAnimationFrame(tick);
+    if (current && !raf && viewportReady && !document.hidden && !contextLost && (transition || (!paused && !motion.matches))) raf = requestAnimationFrame(tick);
   }
   function tick(time) {
     raf = 0;
@@ -167,46 +188,80 @@
     if (!paused && !motion.matches) elapsed += delta;
     if (transition) {
       transition.progress = Math.min(1, transition.progress + delta / 1.6);
-      if (transition.progress >= 1) {
-        const complete = transition.complete;
-        transition = null;
-        complete();
-      }
+      if (transition.progress >= 1) finishTransition();
     }
     if (time - lastRender >= 1000 / 30) { render((time - lastRender) / 1000); lastRender = time; }
     schedule();
   }
 
-  function resize() {
-    if (!renderer) return;
+  function resize(force = false) {
+    if (!renderer || contextLost) return false;
+    const wasReady = viewportReady;
     const rect = stage.getBoundingClientRect();
-    const nextWidth = Math.max(1, rect.width), nextHeight = Math.max(1, rect.height);
-    const nextRatio = Math.min(window.devicePixelRatio || 1, realisticCraft ? 2 : nextWidth <= 820 ? 1.25 : 1.5);
-    if (width === nextWidth && height === nextHeight && pixelRatio === nextRatio) { updateTextRects(); return; }
+    if (!Number.isFinite(rect.width) || !Number.isFinite(rect.height) || rect.width < 2 || rect.height < 2) {
+      viewportReady = false;
+      panel.removeAttribute("data-webgl-ready");
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0; previousTime = 0;
+      return false;
+    }
+    viewportReady = true;
+    const nextWidth = Math.round(rect.width), nextHeight = Math.round(rect.height);
+    // Bound GPU buffers on Retina/ultrawide displays without changing CSS framing.
+    const ratio = Number.isFinite(window.devicePixelRatio) && window.devicePixelRatio > 0 ? window.devicePixelRatio : 1;
+    const limit = renderer.capabilities.maxTextureSize || 8192;
+    const nextRatio = Math.min(ratio, realisticCraft ? 2 : nextWidth <= 820 ? 1.25 : 1.5,
+      Math.sqrt(6000000 / (nextWidth * nextHeight)), limit / Math.max(nextWidth, nextHeight));
+    if (wasReady && width === nextWidth && height === nextHeight && pixelRatio === nextRatio && force !== true) { updateTextRects(); return true; }
     width = nextWidth; height = nextHeight; pixelRatio = nextRatio;
     frame = D.framing(width, height);
     camera.left = -frame.aspect; camera.right = frame.aspect;
     camera.top = 1; camera.bottom = -1; camera.updateProjectionMatrix();
     renderer.setPixelRatio(pixelRatio);
     renderer.setSize(width, height, false);
-    const size = renderer.getDrawingBufferSize(new T.Vector2());
-    targets.forEach(function (target) { target.setSize(size.x, size.y); });
+    syncBlendTargets();
     updateTextRects(); render();
-    if (originalArt && current && current.art.value !== originalArt.key(current.id)) {
+    if (originalArt && current && current.art.value !== artworkKey(current.id)) {
       const id = current.id;
       makeWorld(id).then(function (world) {
-        if (current.id === id && world.art.value === originalArt.key(id)) { current = world; render(); }
+        if (current.id === id && world.art.value === artworkKey(id)) { current = world; recover(); }
       }).catch(function () { /* Retain the decoded image until another resize. */ });
     }
+    return true;
+  }
+
+  function recover(force = false) {
+    if (resize(force) && current) {
+      render();
+      if (!document.hidden) panel.dataset.webglReady = "true";
+    }
+    if (!current) startWorld();
+    updatePause();
+  }
+
+  function startWorld() {
+    if (starting || current || contextLost) return;
+    starting = true;
+    const id = controls.getScene();
+    prepareWorld(id).then(function (world) {
+      if (controls.getScene() !== id) return;
+      current = world; recover(true);
+    }).catch(function () {
+      panel.removeAttribute("data-webgl-ready");
+      controls.button.disabled = false;
+    }).finally(function () {
+      starting = false;
+      if (!current && controls.getScene() !== id) startWorld();
+    });
   }
 
   function updatePause() {
     const button = document.getElementById("orbit3DMotionToggle");
     const stopped = paused || motion.matches;
-    button.disabled = !current || motion.matches || contextLost;
+    button.disabled = !current || !viewportReady || motion.matches || contextLost;
     button.setAttribute("role", "switch");
     button.setAttribute("aria-label", "Scene motion");
-    button.setAttribute("aria-checked", String(!!current && !stopped && !contextLost));
+    button.setAttribute("aria-checked", String(!!current && viewportReady && !stopped && !contextLost));
     button.removeAttribute("aria-pressed");
     button.removeAttribute("title");
     button.dataset.tooltip = motion.matches ? "Motion reduced by system preferences" : contextLost ? "Scene motion unavailable" : paused ? "Turn scene motion on" : "Turn scene motion off";
@@ -216,7 +271,7 @@
       thumb.className = "motion-switch-thumb"; track.appendChild(thumb);
       button.replaceChildren(track); button.dataset.motionSwitchReady = "true";
     }
-    if (stopped || document.hidden || contextLost) { if (raf) cancelAnimationFrame(raf); raf = 0; previousTime = 0; }
+    if (stopped || document.hidden || contextLost || !viewportReady) { if (raf) cancelAnimationFrame(raf); raf = 0; previousTime = 0; }
     schedule();
   }
 
@@ -225,7 +280,7 @@
     panel = document.querySelector(".scene-panel");
     if (!stage || !panel) return false;
     try {
-      renderer = new T.WebGLRenderer({ alpha: false, antialias: true, powerPreference: "low-power" });
+      renderer = new T.WebGLRenderer({ alpha: false, antialias: !originalArt, powerPreference: "low-power" });
       renderer.outputColorSpace = T.SRGBColorSpace;
       camera = new T.OrthographicCamera(-1, 1, 1, -1, 0.1, 160);
       camera.position.set(0, 0, 50); camera.lookAt(0, 0, 0);
@@ -246,7 +301,8 @@
     config.button.addEventListener("pointerenter", function () { makeWorld(config.nextScene()).catch(function () {}); });
     config.button.addEventListener("focus", function () { makeWorld(config.nextScene()).catch(function () {}); });
     config.button.addEventListener("click", async function () {
-      if (busy || !current || contextLost) return;
+      if (busy || contextLost) return;
+      if (!current) { config.setScene(config.nextScene()); startWorld(); return; }
       busy = true;
       config.button.setAttribute("aria-busy", "true"); config.button.setAttribute("aria-disabled", "true");
       try {
@@ -254,38 +310,39 @@
         const next = await prepareWorld(id);
         const from = current; current = next;
         config.setScene(id);
-        if (motion.matches || document.hidden) render();
-        else await new Promise(function (complete) { transition = { from, progress: 0, complete }; previousTime = 0; schedule(); });
+        if (motion.matches || document.hidden || contextLost || !viewportReady) render();
+        else await new Promise(function (complete) { transition = { from, progress: 0, complete }; syncBlendTargets(); previousTime = 0; schedule(); });
       } catch { config.button.setAttribute("aria-label", "Scene unavailable. Try again"); }
       finally { busy = false; config.button.setAttribute("aria-busy", "false"); config.button.setAttribute("aria-disabled", "false"); }
     });
     document.getElementById("orbit3DMotionToggle").addEventListener("click", function () { paused = !paused; updatePause(); });
     document.addEventListener("visibilitychange", function () {
-      if (document.hidden && transition) { const complete = transition.complete; transition = null; complete(); }
-      updatePause();
+      if (document.hidden) { finishTransition(); updatePause(); }
+      else recover(true);
     });
     motion.addEventListener("change", function () {
-      if (motion.matches && transition) { const complete = transition.complete; transition = null; complete(); render(); }
+      if (motion.matches && transition) { finishTransition(); render(); }
       updatePause();
     });
     let rectFrame = 0;
     window.addEventListener("scroll", function () { if (!rectFrame) rectFrame = requestAnimationFrame(function () { rectFrame = 0; updateTextRects(); if (paused || motion.matches) render(); }); }, { passive: true });
-    window.addEventListener("resize", resize, { passive: true });
-    window.visualViewport?.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("resize", function () { recover(); }, { passive: true });
+    window.visualViewport?.addEventListener("resize", function () { recover(); }, { passive: true });
+    window.addEventListener("pageshow", function () { recover(true); });
+    window.addEventListener("load", function () { recover(); });
+    window.addEventListener("focus", function () { recover(); });
+    if (window.ResizeObserver) {
+      const observer = new window.ResizeObserver(function () { recover(); });
+      observer.observe(stage);
+    }
     renderer.domElement.addEventListener("webglcontextlost", function (event) {
       event.preventDefault(); contextLost = true;
       panel.removeAttribute("data-webgl-ready");
-      if (transition) { const complete = transition.complete; transition = null; complete(); }
+      finishTransition();
       updatePause();
     });
-    renderer.domElement.addEventListener("webglcontextrestored", function () { contextLost = false; panel.dataset.webglReady = "true"; resize(); updatePause(); });
-    prepareWorld(config.getScene()).then(function (world) {
-      current = world; render(); panel.dataset.webglReady = "true"; updatePause();
-    }).catch(function () {
-      panel.removeAttribute("data-webgl-ready");
-      config.button.disabled = false;
-      config.button.addEventListener("click", function () { if (!current) config.setScene(config.nextScene()); });
-    });
+    renderer.domElement.addEventListener("webglcontextrestored", function () { contextLost = false; recover(true); });
+    startWorld();
     return true;
   }
   window.Orbit3DPreview = Object.freeze({ connect: initialize });
