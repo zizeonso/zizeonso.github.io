@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><title>Ground Link</title><style>:root{color:#3457d5}@media(prefers-color-scheme:dark){:root{color:#8ba9ff}}</style><g fill="currentColor"><defs><mask id="dish-refined-opening" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64"><rect width="64" height="64" fill="white"/><ellipse cx="29" cy="29" rx="18.5" ry="4.5" transform="rotate(35 29 29)" fill="black"/></mask></defs><path d="M27.5 40.5h5L29.5 50H37v3H21v-3h5Z"/><g mask="url(#dish-refined-opening)"><path d="M10.979 16.381C6.5 31 29 51 47.021 41.619Z"/><ellipse cx="29" cy="29" rx="22" ry="8" transform="rotate(35 29 29)"/></g><path d="m29 31 14-19" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/><circle cx="44.5" cy="10" r="2.6"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Zijin Su</title>
+  <style>:root{color:#111111}@media(prefers-color-scheme:dark){:root{color:#ffffff}}</style>
+  <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="14.5" cy="14.5" rx="11" ry="4" transform="rotate(35 14.5 14.5)"/>
+    <path d="M5.49 8.19C3.25 15.5 14.5 25.5 23.51 20.81M14.5 15.5 21.5 6M14.5 22l-1.5 4m-2.5 0H19"/>
+    <circle cx="22.25" cy="5" r="1"/>
+  </g>
+</svg>
