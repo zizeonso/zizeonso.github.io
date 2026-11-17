@@ -1,0 +1,57 @@
+/* Compact research rows, scoped to the homepage project list. */
+.research-list--compact .research-entry--compact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 204px;
+  gap: 32px;
+  align-items: center;
+  padding: 20px 0;
+  scroll-margin-top: 80px;
+}
+.research-list--compact .research-entry--compact:first-child { padding-top: 0; }
+.research-list--compact .research-entry--compact:last-child { padding-bottom: 0; }
+.research-entry--compact .research-copy { min-width: 0; }
+.research-list--compact .entry-kicker {
+  margin: 0 0 6px;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: .035em;
+}
+.research-list--compact .research-copy > p:not(.entry-kicker) {
+  max-width: 440px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.75;
+}
+.research-list--compact .text-link { margin-top: 9px; font-size: 11px; }
+.research-list--compact .research-preview {
+  width: 100%;
+  max-width: 204px;
+  margin: 0;
+  justify-self: end;
+}
+.research-thumbnail {
+  display: block;
+  padding: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(145, 162, 181, .5);
+  border-radius: 4px;
+  background: #fff;
+  transition: border-color 150ms ease;
+}
+.research-thumbnail:hover { border-color: var(--accent); }
+.research-thumbnail:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.research-thumbnail img { display: block; width: 100%; height: auto; background: #fff; }
+@media (max-width: 900px) {
+  .research-list--compact .research-entry--compact { grid-template-columns: minmax(0, 1fr) 180px; gap: 24px; }
+  .research-list--compact .research-preview { max-width: 180px; }
+}
+@media (max-width: 600px) {
+  .research-list--compact .research-entry--compact { grid-template-columns: minmax(0, 1fr) 112px; gap: 16px; align-items: start; padding: 18px 0; }
+  .research-list--compact .entry-kicker { font-size: 9px; letter-spacing: .015em; }
+  .research-list--compact .research-copy > p:not(.entry-kicker) { font-size: 12px; }
+  .research-list--compact .research-preview { max-width: 112px; }
+}
+@media (max-width: 360px) {
+  .research-list--compact .research-entry--compact { grid-template-columns: minmax(0, 1fr) 96px; gap: 14px; }
+  .research-list--compact .research-preview { max-width: 96px; }
+}
