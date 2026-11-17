@@ -179,7 +179,7 @@ sup { font-size: 0.72em; line-height: 0; }
 .institution-mark { display: flex; align-items: center; justify-content: center; width: 100%; height: 72px; overflow: visible; }
 /* The shared rail centers wide wordmarks without max-width shrinking or offsets. */
 .institution-mark img { flex: 0 0 auto; max-width: none; margin: 0; border-radius: 0; background: transparent; }
-.institution-mark--cuhk img { width: 88px; height: 88px; }
+.institution-mark--cuhk img { width: 74.8px; height: 74.8px; }
 .institution-mark--wordmark img { width: 64px; height: 36px; }
 .institution-mark--ucl img { width: 48px; height: 14px; }
 :root[data-theme="light"] .institution-mark--ucl img { filter: brightness(0); }
@@ -307,7 +307,7 @@ sup { font-size: 0.72em; line-height: 0; }
   .timeline article { grid-template-columns: 68px minmax(0, 1fr); gap: 16px; }
   .timeline img { width: 48px; height: 48px; }
   .institution-mark { height: 64px; }
-  .institution-mark--cuhk img { width: 76px; height: 76px; }
+  .institution-mark--cuhk img { width: 64.6px; height: 64.6px; }
   .institution-mark--wordmark img { width: 56px; height: 32px; }
   .institution-mark--ucl img { width: 42px; height: 12px; }
   .timeline h3 { font-size: 13px; }
